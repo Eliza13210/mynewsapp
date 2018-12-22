@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyNews App</string>
+    <string name="health">Health</string>
+    <string name="movies">Movies</string>
+    <string name="science">Science</string>
+    <string name="most_popular">Most popular</string>
+    <string name="top_stories">Top stories</string>
 </resources>
