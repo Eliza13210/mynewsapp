@@ -5,4 +5,10 @@
     <string name="science">Science</string>
     <string name="most_popular">Most popular</string>
     <string name="top_stories">Top stories</string>
+    <string name="navigation_drawer_open">Open navigation drawer </string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="search_title">Search</string>
+    <string name="action_notifications">Notification</string>
+    <string name="action_help">Help</string>
+    <string name="action_about">About</string>
 </resources>

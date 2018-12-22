@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.oc.liza.mynewsapp.controler.fragments.MainFragment;
+import com.oc.liza.mynewsapp.controller.fragments.MainFragment;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

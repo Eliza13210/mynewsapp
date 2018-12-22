@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.controler.fragments;
+package com.oc.liza.mynewsapp.controller.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

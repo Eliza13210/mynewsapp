@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.oc.liza.mynewsapp.controller.activities.MainActivity">
+
+    <item
+        android:id="@+id/search"
+        android:title="@string/search_title"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_notifications"
+        android:orderInCategory="100"
+        android:title="@string/action_notifications"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:title="@string/action_help"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        android:title="@string/action_about"
+        app:showAsAction="never" />
+</menu>
