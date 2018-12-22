@@ -15,13 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.controller.SearchActivity;
 import com.oc.liza.mynewsapp.utils.MyFragmentPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
     }
+
     // Configure Drawer Layout
     private void configureDrawerLayout() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

@@ -21,7 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.activities.NotificationActivity"></activity>
+        <activity
+            android:name=".controller.activities.SearchActivity"
+            android:label="Search Articles"
+            android:parentActivityName=".controller.activities.MainActivity"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".controller.activities.NotificationActivity"
+            android:label="Notifications"
+            android:parentActivityName=".controller.activities.MainActivity"
+            android:theme="@style/SearchTheme"></activity>
     </application>
 
 </manifest>
