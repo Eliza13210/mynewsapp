@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 
 public class NewsTest {
 
-    News news = new News();
-    NewsImage newsImage = new NewsImage();
+    private News news = new News();
+    private NewsImage newsImage = new NewsImage();
 
     @Test
     public void getUrl_IfStartsWithHttps_ReplaceWithHttp() {
