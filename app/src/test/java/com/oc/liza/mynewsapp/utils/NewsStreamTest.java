@@ -23,11 +23,11 @@ import static org.junit.Assert.*;
 
 public class NewsStreamTest {
 
-     //Override the default AndroidSchedulers.mainThread() Scheduler since it can't be accessed from test
+    //Override the default AndroidSchedulers.mainThread() Scheduler since it can't be accessed from test
 
     @Before
     public void setUp() {
-          RxAndroidPlugins.setInitMainThreadSchedulerHandler(new Function<Callable<Scheduler>, Scheduler>() {
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(new Function<Callable<Scheduler>, Scheduler>() {
             @Override
             public Scheduler apply(Callable<Scheduler> schedulerCallable) {
                 return Schedulers.trampoline();
@@ -44,12 +44,11 @@ public class NewsStreamTest {
     }
 
 
-
     @Test
     public void streamFetchNewslist() {
 
 
-        NewsStream newsStream=new NewsStream();
+        NewsStream newsStream = new NewsStream();
         //1 - Get the stream
         Observable<NewsObject> observable = newsStream.streamFetchNewslist("http://");
         //2 - Create a new TestObserver
