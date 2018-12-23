@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 class News {
+
     @SerializedName("section")
     @Expose
     private String section;
@@ -70,6 +71,11 @@ class News {
     }
 
     public String getUrl() {
+        if (url.startsWith("https")) {
+            //replace https with http in url
+            url = url.substring(5);
+            url = "http" + url;
+        }
         return url;
     }
 
@@ -93,5 +99,21 @@ class News {
         this.media = media;
     }
 
+    public String getImageUrl() {
+        try {
+            return multimedia.get(0).getUrl();
+        } catch (Exception e) {
+            return media.get(0).getMetadata().get(0).getUrl();
+        }
+    }
 
+    public String toString() {
+        String str = "";
+        if (subsection != null && subsection.length() > 1) {
+            str += section + " > " + subsection;
+        } else {
+            str += section;
+        }
+        return str;
+    }
 }
