@@ -83,19 +83,19 @@ public class MainFragment extends Fragment {
 
         switch (position) {
             case 0:
-                url = this.getResources().getString(R.string.topstories);
+                url = this.getResources().getString(R.string.top_stories_url);
                 break;
             case 1:
-                url = this.getResources().getString(R.string.mostpopular);
+                url = this.getResources().getString(R.string.most_popular_url);
                 break;
             case 2:
-                url = this.getResources().getString(R.string.sciencenews);
+                url = this.getResources().getString(R.string.science_url);
                 break;
             case 3:
-                url = this.getResources().getString(R.string.healthnews);
+                url = this.getResources().getString(R.string.health_url);
                 break;
             case 4:
-                url = this.getResources().getString(R.string.moviesnews);
+                url = this.getResources().getString(R.string.movies_url);
         }
 
         //- Execute the stream subscribing to Observable defined inside NewsStream
