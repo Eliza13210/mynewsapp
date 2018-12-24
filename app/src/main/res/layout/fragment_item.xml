@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:paddingLeft="10dp"
     android:paddingTop="5dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:baselineAligned="false">
 
 
     <RelativeLayout
@@ -17,8 +18,9 @@
             android:id="@+id/thumbnail"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:paddingRight="10dp" />
+            android:layout_alignParentStart="true"
+            android:paddingEnd="10dp"
+            android:contentDescription="@string/thumbnail" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -30,7 +32,7 @@
             android:id="@+id/fragment_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/fragment_item_title"
+            android:layout_alignEnd="@+id/fragment_item_title"
             android:paddingTop="5dp"
             android:textStyle="bold" />
 
