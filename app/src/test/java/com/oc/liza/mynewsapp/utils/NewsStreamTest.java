@@ -59,5 +59,6 @@ public class NewsStreamTest {
                 .assertNoTimeout() // 3.2 - Check if no Timeout
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
 
+
     }
 }
