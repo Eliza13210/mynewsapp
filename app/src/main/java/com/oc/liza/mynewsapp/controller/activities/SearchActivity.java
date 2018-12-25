@@ -18,6 +18,9 @@ import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity {
 
+    public String query;
+    public String beginDate;
+    public String endDate;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.search_button)
@@ -28,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText search_begin_date;
     @BindView(R.id.end_date)
     EditText search_end_date;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,20 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public void getSearchUrl() {
+
+        url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;"
+                + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q="
+                + query;
+        if (!beginDate.isEmpty()) {
+            url += "&amp;begin_date=" + beginDate;
+        }
+        if (!endDate.isEmpty()) {
+            url += "&amp;end_date=" + endDate;
+        }
 
     }
 }
