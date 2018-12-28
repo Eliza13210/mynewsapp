@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class News {
+//For top stories and most popular
 
     @SerializedName("section")
     @Expose
@@ -37,6 +38,30 @@ public class News {
     @Expose
     private ArrayList<NewsImage> media;
 
+    //For article search
+    @SerializedName("web_url")
+    @Expose
+    private String web_url;
+
+
+    @SerializedName("snippet")
+    @Expose
+    private String snippet;
+
+
+    @SerializedName("pub_date")
+    @Expose
+    private Date pub_date;
+
+
+    @SerializedName("section_name")
+    @Expose
+    private String subsection_search;
+
+    @SerializedName("news_desk")
+    @Expose
+    private String section_search;
+
 
     public String getSection() {
         return section;
@@ -55,7 +80,12 @@ public class News {
     }
 
     public String getTitle() {
-        return title;
+        if (snippet == null) {
+            return title;
+        } else {
+            return snippet;
+        }
+
     }
 
     public void setTitle(String title) {
@@ -63,20 +93,31 @@ public class News {
     }
 
     public String getPublished_date() {
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
+        if (pub_date == null) {
+            return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
+        } else {
+            return DateFormat.getDateInstance(DateFormat.SHORT).format(pub_date);
+        }
     }
 
     public void setPublished_date(Date published_date) {
+
         this.published_date = published_date;
     }
 
     public String getUrl() {
-        if (url.startsWith("https")) {
-            //replace https with http in url
-            url = url.substring(5);
-            url = "http" + url;
+        if (web_url == null) {
+            if (url.startsWith("https")) {
+                //replace https with http in url
+                url = url.substring(5);
+                url = "http" + url;
+            }
+            return url;
+        } else {
+            return web_url;
         }
-        return url;
+
+
     }
 
     public void setUrl(String url) {
@@ -107,13 +148,23 @@ public class News {
         }
     }
 
-    public String toString() {
-        String str = "";
-        if (subsection != null && subsection.length() > 1) {
-            str += section + " > " + subsection;
+    public String sectionAndSubsectionString() {
+        if (section_search == null && subsection_search == null) {
+            String str = "";
+            if (subsection != null && subsection.length() > 1) {
+                str += section + " > " + subsection;
+            } else {
+                str += section;
+            }
+            return str;
         } else {
-            str += section;
+            String str = "";
+            if (section_search != null && subsection_search.length() > 1) {
+                str += section_search + " > " + subsection_search;
+            } else {
+                str += section_search;
+            }
+            return str;
         }
-        return str;
     }
 }

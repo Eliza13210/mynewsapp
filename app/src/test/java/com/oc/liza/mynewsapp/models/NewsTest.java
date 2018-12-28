@@ -54,19 +54,19 @@ public class NewsTest {
     }
 
     @Test
-    public void toString_ObjectWithSubsection_ReturnStringWithSectionAndSubsection() {
+    public void sectionAndSubsectionString_ObjectWithSubsection_ReturnStringWithSectionAndSubsection() {
         news.setSection("Politics");
         news.setSubsection("California");
 
-        String resultString = news.toString();
+        String resultString = news.sectionAndSubsectionString();
         assertEquals("Politics > California", resultString);
     }
 
     @Test
-    public void toString_ObjectWithoutSubsection_ReturnStringWithSection() {
+    public void sectionAndSubsectionString_ObjectWithoutSubsection_ReturnStringWithSection() {
         news.setSection("Politics");
 
-        String resultString = news.toString();
+        String resultString = news.sectionAndSubsectionString();
         assertEquals("Politics", resultString);
     }
 

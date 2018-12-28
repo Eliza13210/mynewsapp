@@ -14,6 +14,14 @@ public class NewsObject {
     @Expose
     private ArrayList<News> results;
 
+    @SerializedName("response")
+    @Expose
+    private NewsObject response;
+
+    @SerializedName("docs")
+    @Expose
+    private ArrayList<News> docs;
+
     public String getStatus() {
         return status;
     }
@@ -23,10 +31,23 @@ public class NewsObject {
     }
 
     public ArrayList<News> getResults() {
+
         return results;
     }
 
     public void setResults(ArrayList<News> results) {
         this.results = results;
+    }
+
+    public NewsObject getResponse() {
+        return response;
+    }
+
+    public ArrayList<News> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(ArrayList<News> docs) {
+        this.docs = docs;
     }
 }

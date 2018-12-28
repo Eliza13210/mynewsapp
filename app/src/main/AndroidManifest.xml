@@ -30,6 +30,13 @@
             android:name=".controller.activities.NotificationActivity"
             android:label="Notifications"
             android:parentActivityName=".controller.activities.MainActivity"
+            android:theme="@style/SearchTheme" />
+        <activity
+            android:name=".controller.activities.SearchResultActivity"
+            android:label="Search results"
+            android:parentActivityName=".controller.activities.SearchActivity"
+            android:theme="@style/SearchTheme" />
+        <activity android:name=".controller.activities.ArticleWebviewActivity"
             android:theme="@style/SearchTheme"></activity>
     </application>
 

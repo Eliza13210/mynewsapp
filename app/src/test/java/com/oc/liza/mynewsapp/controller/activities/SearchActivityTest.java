@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class SearchActivityTest {
 
-    SearchActivity searchActivity = new SearchActivity();
+    private SearchActivity searchActivity = new SearchActivity();
 
 
     @Test
