@@ -28,12 +28,12 @@ public class NewsTest {
         //try with multimedia list
         ArrayList<NewsImage> multimedia = new ArrayList<>();
 
-        newsImage.setUrl("http://testImage.jpg");
+        newsImage.setUrl("https://static01.nyt.com/testImage.jpg");
         multimedia.add(newsImage);
         news.setMultimedia(multimedia);
 
         String multimediaUrl = news.getImageUrl();
-        assertEquals("http://testImage.jpg", multimediaUrl);
+        assertEquals("https://static01.nyt.com/testImage.jpg", multimediaUrl);
     }
 
     @Test

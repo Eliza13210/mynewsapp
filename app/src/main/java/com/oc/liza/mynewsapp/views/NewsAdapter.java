@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.models.News;
 import com.oc.liza.mynewsapp.models.NewsItem;
 
 import java.util.List;

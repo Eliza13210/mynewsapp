@@ -55,7 +55,7 @@ public class SearchResultFragment extends Fragment {
         ButterKnife.bind(this, view);
 
 
-        SharedPreferences sharedPref=getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         url = sharedPref.getString("SEARCH_URL", null);
         this.configureRecyclerView();
         this.executeHttpRequestWithRetrofit();

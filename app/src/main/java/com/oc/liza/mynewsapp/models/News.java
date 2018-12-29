@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class News implements NewsItem{
+public class News implements NewsItem {
     @SerializedName("section")
     @Expose
     private String section;
@@ -41,6 +41,7 @@ public class News implements NewsItem{
     public String getTitle() {
         return title;
     }
+
     @Override
     public String getPublished_date() {
         return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
@@ -56,6 +57,7 @@ public class News implements NewsItem{
         }
         return url;
     }
+
     @Override
     public String getImageUrl() {
         try {
@@ -64,6 +66,7 @@ public class News implements NewsItem{
             return media.get(0).getMetadata().get(0).getUrl();
         }
     }
+
     @Override
     public String sectionAndSubsectionString() {
         String str = "";
@@ -75,4 +78,23 @@ public class News implements NewsItem{
         return str;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setMultimedia(ArrayList<NewsImage> multimedia) {
+        this.multimedia = multimedia;
+    }
+
+    public void setMedia(ArrayList<NewsImage> media) {
+        this.media = media;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public void setSubsection(String subsection) {
+        this.subsection = subsection;
+    }
 }
