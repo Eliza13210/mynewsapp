@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.News;
+import com.oc.liza.mynewsapp.models.NewsItem;
 import com.oc.liza.mynewsapp.models.NewsObject;
 import com.oc.liza.mynewsapp.utils.NewsStream;
 import com.oc.liza.mynewsapp.views.NewsAdapter;
@@ -35,7 +36,7 @@ public class SearchResultFragment extends Fragment {
 
     private Disposable disposable;
     // 2 - Declare list of news (News) & Adapter
-    private List<News> newsList;
+    private List<NewsItem> newsList;
     private NewsAdapter adapter;
     private String url = "";
 

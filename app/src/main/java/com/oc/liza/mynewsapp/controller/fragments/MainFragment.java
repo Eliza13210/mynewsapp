@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.models.NewsItem;
 import com.oc.liza.mynewsapp.models.NewsObject;
 import com.oc.liza.mynewsapp.models.News;
 import com.oc.liza.mynewsapp.utils.NewsStream;
@@ -31,7 +32,7 @@ public class MainFragment extends Fragment {
 
     private Disposable disposable;
     // 2 - Declare list of news (News) & Adapter
-    private List<News> newsList;
+    private List<NewsItem> newsList;
     private NewsAdapter adapter;
     private int position;
     private String url;

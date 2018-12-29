@@ -7,13 +7,10 @@ import com.oc.liza.mynewsapp.R;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    // 1 - Create static variable to identify Intent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-        }
-
-
+    }
 }

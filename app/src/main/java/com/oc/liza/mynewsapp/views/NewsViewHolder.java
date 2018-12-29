@@ -1,6 +1,5 @@
 package com.oc.liza.mynewsapp.views;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,14 +12,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.controller.activities.ArticleWebviewActivity;
-import com.oc.liza.mynewsapp.controller.activities.MainActivity;
 import com.oc.liza.mynewsapp.models.News;
+import com.oc.liza.mynewsapp.models.NewsItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class NewsViewHolder extends RecyclerView.ViewHolder {
+class NewsViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.fragment_item_title)
     TextView title;
     @BindView(R.id.fragment_date)
@@ -36,22 +35,12 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithNewsItem(final News newsItem, final Context context) {
+    void updateWithNewsItem(final NewsItem newsItem, final Context context) {
+        //Update view with title, date and section
         this.title.setText(newsItem.getTitle());
         this.date.setText(newsItem.getPublished_date());
         this.section.setText(newsItem.sectionAndSubsectionString());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPref=context.getSharedPreferences("MYNEWS_KEY", context.MODE_PRIVATE);
-                SharedPreferences.Editor editor=sharedPref.edit();
-                editor.putString("WEBVIEW_URL",newsItem.getUrl());
-                editor.apply();
-
-                Intent startWebview=new Intent(context, ArticleWebviewActivity.class);
-                context.startActivity(startWebview);
-            }
-        });
+        //Show photo in view if there is one
         try {
             String url = newsItem.getImageUrl();
             Glide.with(context)
@@ -61,7 +50,22 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
             e.printStackTrace();
             Log.e("exception", "error " + e);
         }
+
+        //when user click on view, open the article in a webview inside the app
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //store the articles web url in shared preferences
+                SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("WEBVIEW_URL", newsItem.getUrl());
+                editor.apply();
+
+                //Start webview activity
+                Intent startWebview = new Intent(context, ArticleWebviewActivity.class);
+                context.startActivity(startWebview);
+            }
+        });
+
     }
-
-
 }

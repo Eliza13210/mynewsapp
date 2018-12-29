@@ -6,48 +6,46 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class NewsObject {
-    @SerializedName("status")
-    @Expose
-    private String status;
 
+    //If NewsObject is from Top stories or Most Popular Api
     @SerializedName("results")
     @Expose
     private ArrayList<News> results;
 
+    //If NewsObject is from Article Search Api
     @SerializedName("response")
     @Expose
     private NewsObject response;
 
     @SerializedName("docs")
     @Expose
-    private ArrayList<News> docs;
+    private ArrayList<NewsSearch> docs;
 
-    public String getStatus() {
-        return status;
+    public NewsObject() {
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public ArrayList<News> getResults() {
-
         return results;
-    }
-
-    public void setResults(ArrayList<News> results) {
-        this.results = results;
     }
 
     public NewsObject getResponse() {
         return response;
     }
 
-    public ArrayList<News> getDocs() {
+    public ArrayList<NewsSearch> getDocs() {
         return docs;
     }
 
-    public void setDocs(ArrayList<News> docs) {
+    public void setResults(ArrayList<News> results) {
+        this.results = results;
+    }
+
+    public void setResponse(NewsObject response) {
+        this.response = response;
+    }
+
+    public void setDocs(ArrayList<NewsSearch> docs) {
         this.docs = docs;
     }
 }

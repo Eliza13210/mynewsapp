@@ -1,5 +1,7 @@
 package com.oc.liza.mynewsapp.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,11 +9,11 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class NewsSearch {
+public class NewsSearch implements NewsItem {
+
     @SerializedName("web_url")
     @Expose
     private String url;
-
 
     @SerializedName("snippet")
     @Expose
@@ -25,6 +27,7 @@ public class NewsSearch {
     @Expose
     private Date published_date;
 
+    //Section name can be either of these three
 
     @SerializedName("section_name")
     @Expose
@@ -34,45 +37,36 @@ public class NewsSearch {
     @Expose
     private String section;
 
-    public String getSnippet() {
+    @SerializedName("headline")
+    @Expose
+    private NewsSearch headline;
 
+    @SerializedName("main")
+    @Expose
+    private String main;
+
+
+    @Override
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSubsection() {
-        return subsection;
-    }
-
-    public void setSubsection(String subsection) {
-        this.subsection = subsection;
-    }
-
-    public String getSection() {
-        String str = "";
-        if (subsection != null && subsection.length() > 1) {
-            str += section + " > " + subsection;
-        } else {
-            str += section;
-        }
-        return str;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
+    @Override
     public String getPublished_date() {
-        return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
+        try {
+            return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
+        } catch (Exception e) {
+            Log.e("Date", "No date" + e);
+            return "Pas de date";
+        }
     }
 
-    public void setPublished_date(Date published_date) {
-        this.published_date = published_date;
+    @Override
+    public String getImageUrl() {
+        return multimedia.get(0).getUrl();
     }
 
+    @Override
     public String getUrl() {
         if (url.startsWith("https")) {
             //replace https with http in url
@@ -80,6 +74,19 @@ public class NewsSearch {
             url = "http" + url;
         }
         return url;
+    }
+
+    @Override
+    public String sectionAndSubsectionString() {
+        String str="";
+            if (section != null && subsection != null) {
+                str += section + " > " + subsection;
+            } else if (section != null && subsection == null) {
+                str += section;
+            } else {
+                str += headline.getMain();
+            }
+            return str;
     }
 
     public void setUrl(String url) {
@@ -92,5 +99,9 @@ public class NewsSearch {
 
     public void setMultimedia(ArrayList<NewsImage> multimedia) {
         this.multimedia = multimedia;
+    }
+
+    public String getMain() {
+        return main;
     }
 }

@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.News;
+import com.oc.liza.mynewsapp.models.NewsItem;
 
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     // FOR DATA
-    private List<News> news;
+    private List<NewsItem> news;
     private Context context;
 
     // CONSTRUCTOR
-    public NewsAdapter(List<News> news) {
+    public NewsAdapter(List<NewsItem> news) {
         this.news = news;
     }
 
