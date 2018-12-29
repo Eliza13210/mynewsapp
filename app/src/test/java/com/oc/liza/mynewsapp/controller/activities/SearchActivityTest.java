@@ -18,9 +18,9 @@ public class SearchActivityTest {
 
         searchActivity.getSearchUrl();
 
-        assertEquals("https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q=christmas&amp;begin_date=20010101" +
-                "&amp;end_date=20121212", searchActivity.url);
+        assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
+                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=christmas&begin_date=20010101" +
+                "&end_date=20121212", searchActivity.url);
 
     }
 
@@ -33,8 +33,8 @@ public class SearchActivityTest {
 
         searchActivity.getSearchUrl();
 
-        assertEquals("https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q=kittens", searchActivity.url);
+        assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
+                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=kittens", searchActivity.url);
 
     }
 }

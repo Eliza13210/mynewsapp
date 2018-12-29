@@ -2,14 +2,8 @@ package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -24,25 +18,29 @@ public class ArticleWebviewActivity extends AppCompatActivity {
     @BindView(R.id.webView)
     WebView webView;
 
-    private String url="";
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        webView = new WebView(this);
+        configWebview();
         setContentView(webView);
 
-        webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-
-        SharedPreferences sharedPref=this.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-        url=sharedPref.getString("WEBVIEW_URL", null);
-        webView.loadUrl(url);
     }
 
+    private void configWebview() {
+
+        //Create new webview to show the article and set the app as webclient
+        webView = new WebView(this);
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        //Get the url saved in shared preferences
+        sharedPref=this.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        String url = sharedPref.getString("WEBVIEW_URL", null);
+        webView.loadUrl(url);
+    }
 
 
 }

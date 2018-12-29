@@ -1,11 +1,8 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +24,8 @@ public class SearchActivity extends AppCompatActivity {
     public String query;
     public String beginDate;
     public String endDate;
-    String url;
+    public String url;
+    private SharedPreferences sharedPref;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -68,17 +66,18 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Fetch user input
+                //Fetch user input and create url
                 query = search_query.getText().toString();
                 beginDate = search_begin_date.getText().toString();
                 endDate = search_end_date.getText().toString();
                 getSearchUrl();
 
-                SharedPreferences sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+                //Save url in shared preferences
+                sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("SEARCH_URL", url);
                 editor.apply();
-                Log.e("SearchA", url);
+
                 //Start new activity with the url
                 Intent result = new Intent(SearchActivity.this, SearchResultActivity.class);
                 startActivity(result);
