@@ -74,10 +74,11 @@ public class SearchActivity extends AppCompatActivity {
                 endDate = search_end_date.getText().toString();
                 getSearchUrl();
 
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("SEARCH_URL", url);
                 editor.apply();
+                Log.e("SearchA", url);
                 //Start new activity with the url
                 Intent result = new Intent(SearchActivity.this, SearchResultActivity.class);
                 startActivity(result);

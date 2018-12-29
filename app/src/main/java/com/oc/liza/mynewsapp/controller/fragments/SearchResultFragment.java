@@ -3,6 +3,7 @@ package com.oc.liza.mynewsapp.controller.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,16 +52,14 @@ public class SearchResultFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_result_fragment, container, false);
         ButterKnife.bind(this, view);
+
+
+        SharedPreferences sharedPref=getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        url = sharedPref.getString("SEARCH_URL", null);
         this.configureRecyclerView();
         this.executeHttpRequestWithRetrofit();
 
         return view;
-    }
-
-    public void updateView(String url) {
-        this.url = url;
-
-
     }
 
     //  Configure RecyclerView, Adapter, LayoutManager & glue it together
@@ -80,9 +79,7 @@ public class SearchResultFragment extends Fragment {
     // 1 - Execute our Stream
     private void executeHttpRequestWithRetrofit() {
 
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        url = sharedPref.getString("SEARCH_URL", null);
-       
+
         //- Execute the stream subscribing to Observable defined inside NewsStream
         this.disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
             @Override

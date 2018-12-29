@@ -1,5 +1,7 @@
 package com.oc.liza.mynewsapp.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -62,6 +64,14 @@ public class News {
     @Expose
     private String section_search;
 
+    @SerializedName("headline")
+    @Expose
+    private News headline;
+
+    @SerializedName("main")
+    @Expose
+    private String main;
+
 
     public String getSection() {
         return section;
@@ -93,11 +103,17 @@ public class News {
     }
 
     public String getPublished_date() {
-        if (pub_date == null) {
-            return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
-        } else {
-            return DateFormat.getDateInstance(DateFormat.SHORT).format(pub_date);
+
+        try {
+            if (pub_date == null) {
+                return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
+            } else {
+                return DateFormat.getDateInstance(DateFormat.SHORT).format(pub_date);
+            }
+        } catch (Exception e) {
+            Log.e("Date", "No date" + e);
         }
+        return "Pas de date";
     }
 
     public void setPublished_date(Date published_date) {
@@ -149,22 +165,28 @@ public class News {
     }
 
     public String sectionAndSubsectionString() {
+        String str = "";
         if (section_search == null && subsection_search == null) {
-            String str = "";
             if (subsection != null && subsection.length() > 1) {
                 str += section + " > " + subsection;
             } else {
                 str += section;
             }
-            return str;
+
         } else {
-            String str = "";
-            if (section_search != null && subsection_search.length() > 1) {
+            if (section_search != null && subsection_search != null) {
                 str += section_search + " > " + subsection_search;
-            } else {
+            } else if (section_search != null && subsection_search==null) {
                 str += section_search;
+            } else {
+                str +=  headline.getMain();
             }
-            return str;
+
         }
+        return str;
+    }
+
+    public String getMain() {
+        return main;
     }
 }
