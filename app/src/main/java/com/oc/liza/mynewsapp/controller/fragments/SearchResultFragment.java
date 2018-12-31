@@ -3,9 +3,9 @@ package com.oc.liza.mynewsapp.controller.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +37,7 @@ public class SearchResultFragment extends Fragment {
     private List<NewsItem> newsList;
     private NewsAdapter adapter;
     private String url = "";
+    private Context context;
 
 
     @Override
@@ -57,6 +58,13 @@ public class SearchResultFragment extends Fragment {
         this.executeHttpRequestWithRetrofit();
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        this.context = context;
     }
 
     //  Configure RecyclerView, Adapter, LayoutManager & glue it together
@@ -97,9 +105,13 @@ public class SearchResultFragment extends Fragment {
     }
 
     private void updateUI(NewsObject news) {
-        newsList.addAll(news.getResponse().getDocs());
-        adapter.notifyDataSetChanged();
+        if (news.getResponse().getHits()==0) {
+            Snackbar.make(recyclerView, "Pas de résultat", Snackbar.LENGTH_LONG).show();
 
+        } else {
+            newsList.addAll(news.getResponse().getDocs());
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void disposeWhenDestroy() {

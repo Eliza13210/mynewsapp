@@ -76,16 +76,18 @@ public class NewsSearch implements NewsItem {
 
     @Override
     public String sectionAndSubsectionString() {
-        String str="";
-            if (section != null && subsection != null) {
-                str += section + " > " + subsection;
-            } else if (section != null && subsection == null) {
-                str += section;
-            } else {
-                str += headline.getMain();
-            }
-            return str;
+        String str = "";
+        if (section != null && subsection != null) {
+            str += section + " > " + subsection;
+        } else if (section != null && subsection == null) {
+            str += section;
+        } else if (headline.getMain() != null) {
+            str += headline.getMain();
+        } else {
+        }
+        return str;
     }
+
 
     public void setUrl(String url) {
         this.url = url;
@@ -104,18 +106,18 @@ public class NewsSearch implements NewsItem {
     }
 
     public void setPublished_date(Date published_date) {
-        this.published_date=published_date;
+        this.published_date = published_date;
     }
 
     public void setMain(String main) {
-        this.main=main;
+        this.main = main;
     }
 
     public void setHeadline(NewsSearch headline) {
-        this.headline=headline;
+        this.headline = headline;
     }
 
     public void setSection(String section) {
-        this.section=section;
+        this.section = section;
     }
 }

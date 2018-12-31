@@ -21,16 +21,25 @@ public class NewsObject {
     @Expose
     private ArrayList<NewsSearch> docs;
 
+    @SerializedName("meta")
+    @Expose
+    private NewsSearch meta;
+
+    @SerializedName("hits")
+    @Expose
+    private int hits;
+
     public NewsObject() {
     }
 
-public ArrayList getList(){
-        if (results==null){
+    public ArrayList getList() {
+        if (results == null) {
             return response.getDocs();
-        } else{
+        } else {
             return results;
         }
-}
+    }
+
     public ArrayList<News> getResults() {
         return results;
     }
@@ -54,4 +63,13 @@ public ArrayList getList(){
     public void setDocs(ArrayList<NewsSearch> docs) {
         this.docs = docs;
     }
+
+    public NewsSearch getMeta(){
+        return meta;
+    }
+
+    public int getHits(){
+        return hits;
+    }
+
 }
