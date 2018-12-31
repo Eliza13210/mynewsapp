@@ -1,6 +1,5 @@
 package com.oc.liza.mynewsapp.models;
 
-import android.util.Log;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -56,7 +55,6 @@ public class NewsSearch implements NewsItem {
         try {
             return DateFormat.getDateInstance(DateFormat.SHORT).format(published_date);
         } catch (Exception e) {
-            Log.e("Date", "No date" + e);
             return "Pas de date";
         }
     }
@@ -103,5 +101,21 @@ public class NewsSearch implements NewsItem {
 
     public String getMain() {
         return main;
+    }
+
+    public void setPublished_date(Date published_date) {
+        this.published_date=published_date;
+    }
+
+    public void setMain(String main) {
+        this.main=main;
+    }
+
+    public void setHeadline(NewsSearch headline) {
+        this.headline=headline;
+    }
+
+    public void setSection(String section) {
+        this.section=section;
     }
 }

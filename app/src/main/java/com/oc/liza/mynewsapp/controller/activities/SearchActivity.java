@@ -10,10 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -25,6 +29,8 @@ public class SearchActivity extends AppCompatActivity {
     public String beginDate;
     public String endDate;
     public String url;
+    public String checkboxQuery;
+    private List<CheckBox> checkBoxList;
     private SharedPreferences sharedPref;
 
     @BindView(R.id.toolbar)
@@ -37,6 +43,12 @@ public class SearchActivity extends AppCompatActivity {
     EditText search_begin_date;
     @BindView(R.id.end_date)
     EditText search_end_date;
+    @BindView(R.id.cbHealth)
+    CheckBox cbHealth;
+    @BindView(R.id.cbMovies)
+    CheckBox cbMovies;
+    @BindView(R.id.cbScience)
+    CheckBox cbScience;
 
 
     @Override
@@ -44,7 +56,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
-
         initLayout();
     }
 
@@ -66,41 +77,66 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Fetch user input and create url
-                query = search_query.getText().toString();
-                beginDate = search_begin_date.getText().toString();
-                endDate = search_end_date.getText().toString();
-                getSearchUrl();
+                getUserInput();
+                createSearchUrl();
+                saveUrl();
 
-                //Save url in shared preferences
-                sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("SEARCH_URL", url);
-                editor.apply();
-
-                //Start new activity with the url
-                Intent result = new Intent(SearchActivity.this, SearchResultActivity.class);
-                startActivity(result);
-
-
+                //Start new activity to show results
+                if(checkboxQuery==null){
+                    Toast.makeText(getApplicationContext(), "Sélectionnez au moins un mot clé", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent result = new Intent(SearchActivity.this, SearchResultActivity.class);
+                    startActivity(result);
+                    Log.e("start result", url);
+                }
             }
         });
 
     }
 
-    //This method will create the url to use for the request with the user input
+    //Get the user input; search query, checkbox selection, begin date and end date
+    private void getUserInput() {
 
-    public void getSearchUrl() {
+        query = search_query.getText().toString();
+        beginDate = search_begin_date.getText().toString();
+        endDate = search_end_date.getText().toString();
+
+        checkboxQuery="";
+        checkBoxList = new ArrayList<>();
+        checkBoxList.add(cbHealth);
+        checkBoxList.add(cbMovies);
+        checkBoxList.add(cbScience);
+        for (CheckBox box : checkBoxList) {
+            if (box.isChecked()) {
+                checkboxQuery += box.getText()+"%20";
+            }
+        }
+
+    }
+
+    //This method will create the url to use for the request with the user input
+    public void createSearchUrl() {
 
         url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?&"
                 + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q="
-                + query;
+                + checkboxQuery;
+        if (!query.isEmpty())
+            url += query;
         if (!beginDate.isEmpty()) {
             url += "&begin_date=" + beginDate;
         }
         if (!endDate.isEmpty()) {
             url += "&end_date=" + endDate;
         }
+        url += "&sort=newest";
+    }
+
+    private void saveUrl() {
+        //Save url in shared preferences
+        sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("SEARCH_URL", url);
+        editor.apply();
 
     }
 }

@@ -23,9 +23,9 @@
 
     <string name="top_stories_url">https://api.nytimes.com/svc/topstories/v2/home.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
     <string name="most_popular_url">https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
-    <string name="science_url">https://api.nytimes.com/svc/topstories/v2/science.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
-    <string name="health_url">https://api.nytimes.com/svc/topstories/v2/health.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
-    <string name="movies_url">https://api.nytimes.com/svc/topstories/v2/movies.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
+    <string name="science_url">https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q=science</string>
+    <string name="health_url">https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q=health</string>
+    <string name="movies_url">https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&amp;q=movies</string>
     <string name="article_url">https://api.nytimes.com/svc/search/v2/articlesearch.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
     <string name="enable_notify">Enable notifications (once per day)</string>
     <string name="thumbnail">thumbnail</string>

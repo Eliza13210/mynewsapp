@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsItem;
 import com.oc.liza.mynewsapp.models.NewsObject;
-import com.oc.liza.mynewsapp.models.News;
 import com.oc.liza.mynewsapp.utils.NewsStream;
 import com.oc.liza.mynewsapp.views.NewsAdapter;
 
@@ -105,6 +105,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onError(Throwable e) {
+                Log.e("Error observer", "Error " + e);
 
             }
 
@@ -123,7 +124,7 @@ public class MainFragment extends Fragment {
     // -------------------
 
     private void updateUIWithListOfNews(NewsObject news) {
-        newsList.addAll(news.getResults());
+        newsList.addAll(news.getList());
         adapter.notifyDataSetChanged();
     }
 

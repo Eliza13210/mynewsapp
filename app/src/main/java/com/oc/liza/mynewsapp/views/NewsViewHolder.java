@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.controller.activities.ArticleWebviewActivity;
-import com.oc.liza.mynewsapp.models.News;
 import com.oc.liza.mynewsapp.models.NewsItem;
 
 import butterknife.BindView;
@@ -40,17 +39,12 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
         this.title.setText(newsItem.getTitle());
         this.date.setText(newsItem.getPublished_date());
         this.section.setText(newsItem.sectionAndSubsectionString());
-        //Show photo in view if there is one
-        try {
-            String url = newsItem.getImageUrl();
-            Glide.with(context)
-                    .load(url)
-                    .into(thumbnail);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("exception", "error " + e);
-        }
 
+        loadPhoto(newsItem,context);
+        startWebview(newsItem,context);
+    }
+
+    private void startWebview(final NewsItem newsItem, final Context context) {
         //when user click on view, open the article in a webview inside the app
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,5 +61,18 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+    }
+
+    private void loadPhoto(final NewsItem newsItem, final Context context) {
+        //Show photo in view if there is one
+        try {
+            String url = newsItem.getImageUrl();
+            Glide.with(context)
+                    .load(url)
+                    .into(thumbnail);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("exception", "error " + e);
+        }
     }
 }

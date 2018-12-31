@@ -24,7 +24,13 @@ public class NewsObject {
     public NewsObject() {
     }
 
-
+public ArrayList getList(){
+        if (results==null){
+            return response.getDocs();
+        } else{
+            return results;
+        }
+}
     public ArrayList<News> getResults() {
         return results;
     }

@@ -9,11 +9,11 @@ public class MediaImageTest {
 
     @Test
     public void getUrlFromMediaImage() {
-        MediaImage m = new MediaImage();
+        MediaImage mediaImage = new MediaImage();
         String testUrl = "http://www.google.com";
-        m.setUrl(testUrl);
-        String url = m.getUrl();
-        assertNotNull(m);
+        mediaImage.setUrl(testUrl);
+        String url = mediaImage.getUrl();
+        assertNotNull(mediaImage);
         assertEquals(url, testUrl);
     }
 

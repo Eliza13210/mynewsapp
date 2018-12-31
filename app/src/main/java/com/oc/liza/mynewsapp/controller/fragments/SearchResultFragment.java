@@ -13,10 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.models.News;
 import com.oc.liza.mynewsapp.models.NewsItem;
 import com.oc.liza.mynewsapp.models.NewsObject;
 import com.oc.liza.mynewsapp.utils.NewsStream;
@@ -44,8 +42,6 @@ public class SearchResultFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable
