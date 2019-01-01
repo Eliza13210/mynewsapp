@@ -1,42 +1,50 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
+import android.content.Intent;
+
+import com.oc.liza.mynewsapp.R;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import static org.junit.Assert.*;
+import static org.robolectric.Shadows.shadowOf;
 
+
+@RunWith(RobolectricTestRunner.class)
 public class SearchActivityTest {
 
-    private SearchActivity searchActivity = new SearchActivity();
+    private SearchActivity activity;
 
-
-    @Test
-    public void getUrl_IfSearchQueryAndDates_ReturnUrl() {
-
-        searchActivity.query = "christmas";
-        searchActivity.beginDate = "20010101";
-        searchActivity.endDate = "20121212";
-        searchActivity.checkboxQuery="Science";
-
-        searchActivity.createSearchUrl();
-
-        assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=Sciencechristmas&begin_date=20010101" +
-                "&end_date=20121212&sort=newest", searchActivity.url);
-
+    @Before
+    public void setUp() throws Exception {
+        activity = Robolectric.buildActivity(SearchActivity.class)
+                .create()
+                .resume()
+                .get();
     }
 
     @Test
-    public void getUrl_IfSearchQueryAndNoDates_ReturnUrl() {
+    public void testSomething() throws Exception {
+        assertNotNull(shadowOf(RuntimeEnvironment.application));
+        assertTrue(Robolectric.setupActivity(SearchActivity.class) != null);
+    }
 
-        searchActivity.query = "kittens";
-        searchActivity.beginDate = "";
-        searchActivity.endDate = "";
-        searchActivity.checkboxQuery="Movies";
+    @Test
+    public void shouldNotBeNull() throws Exception {
+        assertNotNull(activity);
+    }
 
-        searchActivity.createSearchUrl();
+    @Test
+    public void clickingSearchButton_shouldStartSearchResultActivity() {
+        activity.findViewById(R.id.search_button).performClick();
 
-        assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=Movieskittens&sort=newest", searchActivity.url);
-
+        Intent expectedIntent = new Intent(activity, SearchResultActivity.class);
+        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        assertEquals(expectedIntent.getComponent(), actual.getComponent());
     }
 }

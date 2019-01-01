@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.utils.UrlManager;
 
 import java.util.Objects;
 
