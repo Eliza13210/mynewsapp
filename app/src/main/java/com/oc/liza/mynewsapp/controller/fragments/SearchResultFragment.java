@@ -53,7 +53,8 @@ public class SearchResultFragment extends Fragment {
 
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-        url = sharedPref.getString("SEARCH_URL", null);
+        url = sharedPref.getString("SEARCH_KEY", null);
+        Log.e("resultA", url);
         this.configureRecyclerView();
         this.executeHttpRequestWithRetrofit();
 
@@ -105,7 +106,7 @@ public class SearchResultFragment extends Fragment {
     }
 
     private void updateUI(NewsObject news) {
-        if (news.getResponse().getHits()==0) {
+        if (news.checkIfResult()==0) {
             Snackbar.make(recyclerView, "Pas de résultat", Snackbar.LENGTH_LONG).show();
 
         } else {

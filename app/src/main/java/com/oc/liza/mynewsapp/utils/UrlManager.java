@@ -2,6 +2,7 @@ package com.oc.liza.mynewsapp.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -19,16 +20,29 @@ public class UrlManager {
 
     public UrlManager(Context context) {
         this.context = context;
-
     }
 
-    //Get the user input; search query, checkbox selection, begin date and end date
+    /**
+     * This function gets all the user input
+     *
+     * @param search_query      the edit text view with the search query
+     * @param search_begin_date the edit text view with begin date
+     * @param search_end_date   the edit text view with the end date
+     * @param cbHealth          the checkbox with category health
+     * @param cbMovies          the checkbox with category movies
+     * @param cbScience         the checkbox with category science
+     */
     public void getUserInput(EditText search_query, EditText search_begin_date, EditText search_end_date, CheckBox cbHealth, CheckBox cbMovies, CheckBox cbScience) {
 
         query = search_query.getText().toString();
-        beginDate = search_begin_date.getText().toString();
-        endDate = search_end_date.getText().toString();
 
+        if (search_begin_date != null && search_end_date != null) {
+            beginDate = search_begin_date.getText().toString();
+            endDate = search_end_date.getText().toString();
+        } else{
+            beginDate="";
+            endDate="";
+        }
         checkBoxList = new ArrayList<>();
         checkBoxList.add(cbHealth);
         checkBoxList.add(cbMovies);
@@ -38,41 +52,54 @@ public class UrlManager {
                 checkboxQuery += box.getText() + "%20";
             }
         }
-
+        Log.e("userinput", url);
     }
 
-    //This method will create the url to use for the request with the user input
+    /**
+     * This method will create the url to use for the request with the user input
+     */
     public void createSearchUrl() {
 
-        this.url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?&"
+        url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?&"
                 + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q="
                 + checkboxQuery;
         if (!query.isEmpty())
-            this.url += query;
+            url += query;
         if (!beginDate.isEmpty()) {
-            this.url += "&begin_date=" + beginDate;
+            url += "&begin_date=" + beginDate;
         }
         if (!endDate.isEmpty()) {
-            this.url += "&end_date=" + endDate;
+            url += "&end_date=" + endDate;
         }
-        this.url += "&sort=newest";
+        url += "&sort=newest";
+        Log.e("createurl", url);
     }
 
     public String getUrl() {
         return url;
     }
 
-    private void saveUrl(String sharedPrefKey) {
+    /**
+     * Save the url in shared preferences
+     *
+     * @param sharedPrefKey the key you want to associate the url with in sharedpreferences
+     */
+
+    public void saveUrl(String sharedPrefKey) {
         SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("SEARCH_URL", url);
+        editor.putString(sharedPrefKey, url);
         editor.apply();
-
-
+        Log.e("saveurl", url);
     }
 
+    /**
+     * Check that the user has chosen at least one checkbox category and one search query
+     *
+     * @return true if conditions are met
+     */
     public boolean checkConditions() {
-        return (checkboxQuery == null || query == null);
+        return (checkboxQuery != null || query != null);
     }
 
 }

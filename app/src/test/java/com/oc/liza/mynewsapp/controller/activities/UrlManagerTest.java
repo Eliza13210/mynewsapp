@@ -62,7 +62,9 @@ public class UrlManagerTest {
                 "&end_date=20121212&sort=newest", url);
     }
 
-
+    /**
+     * A mocked Editable that allow us to mock user input
+     */
     class MockEditable implements Editable {
 
         private String str;

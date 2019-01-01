@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.utils.UrlManager;
 
-import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -26,11 +25,7 @@ import butterknife.ButterKnife;
 public class SearchActivity extends AppCompatActivity {
 
     public String query;
-    public String beginDate;
-    public String endDate;
     public String url;
-    public String checkboxQuery;
-    private List<CheckBox> checkBoxList;
     private SharedPreferences sharedPref;
     private UrlManager manager;
 
@@ -79,57 +74,27 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * Let the manager take care of creating the url to search with the user input
+                 */
                 manager.getUserInput(search_query, search_begin_date, search_end_date, cbHealth, cbMovies, cbScience);
-                saveUrl();
-                //Start new activity to show results
+                manager.createSearchUrl();
+                manager.saveUrl("SEARCH_KEY");
+
+                /**
+                 * Start new activity to show results if the conditions are met
+                 */
                 if (manager.checkConditions()) {
-                    Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
-                } else {
                     startActivity(new Intent(SearchActivity.this, SearchResultActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     }
 
-    /**
-     * //Get the user input; search query, checkbox selection, begin date and end date
-     * private void getUserInput() {
-     * <p>
-     * query = search_query.getText().toString();
-     * beginDate = search_begin_date.getText().toString();
-     * endDate = search_end_date.getText().toString();
-     * <p>
-     * checkboxQuery="";
-     * checkBoxList = new ArrayList<>();
-     * checkBoxList.add(cbHealth);
-     * checkBoxList.add(cbMovies);
-     * checkBoxList.add(cbScience);
-     * for (CheckBox box : checkBoxList) {
-     * if (box.isChecked()) {
-     * checkboxQuery += box.getText()+"%20";
-     * }
-     * }
-     * <p>
-     * }
-     * <p>
-     * //This method will create the url to use for the request with the user input
-     * public void createSearchUrl() {
-     * <p>
-     * url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?&"
-     * + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q="
-     * + checkboxQuery;
-     * if (!query.isEmpty())
-     * url += query;
-     * if (!beginDate.isEmpty()) {
-     * url += "&begin_date=" + beginDate;
-     * }
-     * if (!endDate.isEmpty()) {
-     * url += "&end_date=" + endDate;
-     * }
-     * url += "&sort=newest";
-     * }
-     */
+
     private void saveUrl() {
         //Save url in shared preferences
         url = manager.getUrl();

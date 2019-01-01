@@ -23,7 +23,7 @@ public class NewsObject {
 
     @SerializedName("meta")
     @Expose
-    private NewsSearch meta;
+    private NewsObject meta;
 
     @SerializedName("hits")
     @Expose
@@ -64,12 +64,16 @@ public class NewsObject {
         this.docs = docs;
     }
 
-    public NewsSearch getMeta(){
+    public NewsObject getMeta(){
         return meta;
     }
 
     public int getHits(){
         return hits;
+
+    }
+    public int checkIfResult(){
+        return getResponse().getMeta().getHits();
     }
 
 }

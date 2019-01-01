@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.utils.UrlManager;
@@ -18,10 +23,23 @@ import butterknife.ButterKnife;
 
 
 public class NotificationActivity extends AppCompatActivity {
+
+    private UrlManager manager;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.query)
     EditText query;
+    @BindView(R.id.switch_notify)
+    Switch switchNotify;
+    @BindView(R.id.cbHealth)
+    CheckBox cbHealth;
+    @BindView(R.id.cbMovies)
+    CheckBox cbMovies;
+    @BindView(R.id.cbScience)
+    CheckBox cbScience;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +50,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void initNotification() {
+        manager = new UrlManager(this);
 
         setSupportActionBar(toolbar);
 
@@ -46,5 +65,26 @@ public class NotificationActivity extends AppCompatActivity {
 
         query.setSelection(0);
         Objects.requireNonNull(this.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        switchNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    manager.getUserInput(query,null,null,cbHealth,cbMovies,cbScience);
+                    manager.createSearchUrl();
+                    manager.saveUrl("NOTIFY_URL");
+                    Log.e("Notify", manager.getUrl());
+
+                    enableSchedulesSearch();
+                } else {
+                    Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+    }
+
+    private void enableSchedulesSearch() {
+
     }
 }
