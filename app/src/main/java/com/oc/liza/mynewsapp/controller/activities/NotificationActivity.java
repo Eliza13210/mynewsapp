@@ -1,5 +1,6 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.utils.NotificationTimerTask;
 import com.oc.liza.mynewsapp.utils.UrlManager;
 
 import java.util.Objects;
@@ -75,7 +77,7 @@ public class NotificationActivity extends AppCompatActivity {
                     manager.saveUrl("NOTIFY_URL");
                     Log.e("Notify", manager.getUrl());
 
-                    enableSchedulesSearch();
+                    enableNotify();
                 } else {
                     Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT).show();
 
@@ -84,7 +86,10 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
-    private void enableSchedulesSearch() {
+    private void enableNotify() {
+        Context context=getApplicationContext();
+        NotificationTimerTask notify=new NotificationTimerTask(context);
+
 
     }
 }

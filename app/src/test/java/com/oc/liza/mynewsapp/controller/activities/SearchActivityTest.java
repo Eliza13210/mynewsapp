@@ -35,11 +35,6 @@ public class SearchActivityTest {
     }
 
     @Test
-    public void shouldNotBeNull() throws Exception {
-        assertNotNull(activity);
-    }
-
-    @Test
     public void clickingSearchButton_shouldStartSearchResultActivity() {
         activity.findViewById(R.id.search_button).performClick();
 

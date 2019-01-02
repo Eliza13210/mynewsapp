@@ -91,17 +91,5 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-
-    private void saveUrl() {
-        //Save url in shared preferences
-        url = manager.getUrl();
-        sharedPref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("SEARCH_URL", url);
-        editor.apply();
-        Log.e("start result", url);
     }
 }
