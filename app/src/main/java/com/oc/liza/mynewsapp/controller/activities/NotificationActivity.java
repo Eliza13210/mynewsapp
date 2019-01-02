@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
@@ -42,7 +43,6 @@ public class NotificationActivity extends AppCompatActivity {
     CheckBox cbScience;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,24 +72,27 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    manager.getUserInput(query,null,null,cbHealth,cbMovies,cbScience);
-                    manager.createSearchUrl();
-                    manager.saveUrl("NOTIFY_URL");
-                    Log.e("Notify", manager.getUrl());
-
+                    saveNotifyUrl();
                     enableNotify();
                 } else {
-                    Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT).show();
-
+                    Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
             }
         });
     }
 
+    private void saveNotifyUrl() {
+        manager.getUserInput(query, null, null, cbHealth, cbMovies, cbScience);
+        manager.createSearchUrl();
+        manager.saveUrl("NOTIFY_URL");
+        Log.e("Notify", manager.getUrl());
+    }
+
     private void enableNotify() {
-        Context context=getApplicationContext();
-        NotificationTimerTask notify=new NotificationTimerTask(context);
-
-
+        Context context = getApplicationContext();
+        NotificationTimerTask notify = new NotificationTimerTask(context);
+        notify.fetchNews();
     }
 }

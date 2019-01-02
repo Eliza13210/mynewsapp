@@ -3,6 +3,7 @@ package com.oc.liza.mynewsapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.models.NewsObject;
 
@@ -19,11 +20,10 @@ public class NotificationTimerTask {
 
     public NotificationTimerTask(Context context) {
         this.context = context;
-        fetchNews();
     }
 
 
-    private void fetchNews() {
+    public void fetchNews() {
 
         SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         url = sharedPref.getString("NOTIFY_URL", null);
@@ -35,6 +35,12 @@ public class NotificationTimerTask {
                 disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
                     @Override
                     public void onNext(NewsObject news) {
+                        if (news.checkIfResult()==0) {
+                            Toast.makeText(context, "Il y a un nouvel article", Toast.LENGTH_LONG).show();
+                        } if (news.checkIfResult()>0){
+                            int hits=news.checkIfResult();
+                            Toast.makeText(context,"Il y a " + hits + " nouveaux articles", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
@@ -48,8 +54,6 @@ public class NotificationTimerTask {
                     }
                 });
             }
-
-
         };
         Timer timer=new Timer();
         timer.schedule(task,0,24*60*60*1000);
