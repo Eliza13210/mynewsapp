@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 public class NotificationActivity extends AppCompatActivity {
 
     private UrlManager manager;
+    private NotificationTimerTask notify;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -74,7 +75,9 @@ public class NotificationActivity extends AppCompatActivity {
                 if (isChecked) {
                     saveNotifyUrl();
                     enableNotify();
+                    switchNotify.isChecked();
                 } else {
+                    notify.cancelNotification();
                     Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
                     toast.show();
@@ -92,7 +95,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     private void enableNotify() {
         Context context = getApplicationContext();
-        NotificationTimerTask notify = new NotificationTimerTask(context);
+        notify = new NotificationTimerTask(context);
         notify.fetchNews();
     }
 }
