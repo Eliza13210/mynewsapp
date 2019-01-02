@@ -2,7 +2,9 @@ package com.oc.liza.mynewsapp.controller.activities;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +27,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String CHANNEL_ID = "NOTIFICATION CHANNEL";
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.container)
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initMain();
         this.configureDrawerLayout();
         this.configureNavigationView();
+
+        createNotificationChannel();
     }
 
     private void initMain() {
@@ -132,6 +137,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
+            SharedPreferences preferences=getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+            SharedPreferences.Editor edit=preferences.edit();
+            edit.putString("CHANNEL_KEY", CHANNEL_ID);
         }
     }
 }

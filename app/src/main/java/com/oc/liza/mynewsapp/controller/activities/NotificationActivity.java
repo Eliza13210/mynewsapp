@@ -2,6 +2,7 @@ package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,8 @@ public class NotificationActivity extends AppCompatActivity {
 
     private UrlManager manager;
     private NotificationTimerTask notify;
+    private boolean switchIsChecked;
+    private SharedPreferences pref;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -49,7 +52,16 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
+        pref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        isSwitchChecked();
         initNotification();
+    }
+
+    private void isSwitchChecked() {
+        switchIsChecked = pref.getBoolean("SWITCH_KEY", false);
+        if (switchIsChecked) {
+            switchNotify.setChecked(true);
+        }
     }
 
     private void initNotification() {
@@ -73,11 +85,15 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    pref.edit().putBoolean("SWITCH_KEY", true).apply();
                     saveNotifyUrl();
                     enableNotify();
-                    switchNotify.isChecked();
+
                 } else {
-                    notify.cancelNotification();
+                    pref.edit().putBoolean("SWITCH_KEY", false).apply();
+                    if (notify != null) {
+                        notify.cancelNotification();
+                    }
                     Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
                     toast.show();
@@ -90,7 +106,6 @@ public class NotificationActivity extends AppCompatActivity {
         manager.getUserInput(query, null, null, cbHealth, cbMovies, cbScience);
         manager.createSearchUrl();
         manager.saveUrl("NOTIFY_URL");
-        Log.e("Notify", manager.getUrl());
     }
 
     private void enableNotify() {

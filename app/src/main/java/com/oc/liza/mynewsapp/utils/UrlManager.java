@@ -39,9 +39,9 @@ public class UrlManager {
         if (search_begin_date != null && search_end_date != null) {
             beginDate = search_begin_date.getText().toString();
             endDate = search_end_date.getText().toString();
-        } else{
-            beginDate="";
-            endDate="";
+        } else {
+            beginDate = "";
+            endDate = "";
         }
         checkBoxList = new ArrayList<>();
         checkBoxList.add(cbHealth);
@@ -52,7 +52,6 @@ public class UrlManager {
                 checkboxQuery += box.getText() + "%20";
             }
         }
-        Log.e("userinput", url);
     }
 
     /**
@@ -72,7 +71,6 @@ public class UrlManager {
             url += "&end_date=" + endDate;
         }
         url += "&sort=newest";
-        Log.e("createurl", url);
     }
 
     public String getUrl() {
@@ -90,7 +88,6 @@ public class UrlManager {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(sharedPrefKey, url);
         editor.apply();
-        Log.e("saveurl", url);
     }
 
     /**
