@@ -38,8 +38,17 @@
         <activity
             android:name=".controller.activities.ArticleWebviewActivity"
             android:theme="@style/SearchTheme" />
-        <activity android:name=".controller.activities.HelpActivity" />
-        <activity android:name=".controller.activities.AboutActivity"></activity>
+        <activity
+            android:name=".controller.activities.HelpActivity"
+            android:label="Help"
+            android:parentActivityName=".controller.activities.MainActivity"
+            android:theme="@style/SearchTheme"/>
+        <activity
+            android:name=".controller.activities.AboutActivity"
+            android:label="About"
+            android:parentActivityName=".controller.activities.MainActivity"
+            android:theme="@style/SearchTheme"/>
+
     </application>
 
 </manifest>
