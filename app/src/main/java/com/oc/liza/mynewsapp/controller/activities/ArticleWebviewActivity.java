@@ -18,8 +18,6 @@ public class ArticleWebviewActivity extends AppCompatActivity {
     @BindView(R.id.webView)
     WebView webView;
 
-    SharedPreferences sharedPref;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,7 @@ public class ArticleWebviewActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 
         //Get the url saved in shared preferences
-        sharedPref=this.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = this.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         String url = sharedPref.getString("WEBVIEW_URL", null);
         webView.loadUrl(url);
     }

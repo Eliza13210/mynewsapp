@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String CHANNEL_ID = "NOTIFICATION CHANNEL";
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.container)
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         startActivity(item);
-
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -127,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.action_help:
                 // User chose the "Help" action
-                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+                startActivity(new Intent(MainActivity.this, HelpActivity.class));
                 break;
             case R.id.action_about:
                 // User chose the "About" action
-                startActivity(new Intent(MainActivity.this,AboutActivity.class));
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 break;
             default:
                 // If we got here, the user's action was not recognized.
