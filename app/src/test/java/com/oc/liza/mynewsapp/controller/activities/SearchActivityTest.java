@@ -29,7 +29,7 @@ public class SearchActivityTest {
     }
 
     @Test
-    public void testSomething() throws Exception {
+    public void testActivityExists() throws Exception {
         assertNotNull(shadowOf(RuntimeEnvironment.application));
         assertTrue(Robolectric.setupActivity(SearchActivity.class) != null);
     }

@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // automatically handle clicks on the Home/Up button
         startActivity(item);
         return true;
     }
@@ -117,21 +116,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.search:
+                //User chose the "Search" item
                 Intent search = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(search);
                 break;
             case R.id.action_notifications:
-                // User chose the "Settings" item, show the app settings UI...
+                // User chose the "Notification" item
                 Intent notification = new Intent(MainActivity.this, NotificationActivity.class);
                 startActivity(notification);
                 break;
             case R.id.action_help:
-                // User chose the "Help" action, mark the current item
-                // as a favorite...
+                // User chose the "Help" action
+                startActivity(new Intent(MainActivity.this,HelpActivity.class));
                 break;
             case R.id.action_about:
-                // User chose the "About" action, mark the current item
-                // as a favorite...
+                // User chose the "About" action
+                startActivity(new Intent(MainActivity.this,AboutActivity.class));
                 break;
             default:
                 // If we got here, the user's action was not recognized.

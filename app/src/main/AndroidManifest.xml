@@ -36,8 +36,11 @@
             android:label="Search results"
             android:parentActivityName=".controller.activities.SearchActivity"
             android:theme="@style/SearchTheme" />
-        <activity android:name=".controller.activities.ArticleWebviewActivity"
-            android:theme="@style/SearchTheme"></activity>
+        <activity
+            android:name=".controller.activities.ArticleWebviewActivity"
+            android:theme="@style/SearchTheme" />
+        <activity android:name=".controller.activities.HelpActivity" />
+        <activity android:name=".controller.activities.AboutActivity"></activity>
     </application>
 
 </manifest>
