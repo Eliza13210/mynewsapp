@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.controller.activities;
+package com.oc.liza.mynewsapp.utils;
 
 import android.content.Context;
 import android.text.Editable;

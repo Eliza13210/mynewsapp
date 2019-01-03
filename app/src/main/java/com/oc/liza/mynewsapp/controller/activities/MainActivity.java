@@ -153,10 +153,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
-
-            SharedPreferences preferences=getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-            SharedPreferences.Editor edit=preferences.edit();
-            edit.putString("CHANNEL_KEY", CHANNEL_ID);
         }
+        SharedPreferences preferences = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putString("CHANNEL_KEY", CHANNEL_ID).apply();
+
     }
 }

@@ -85,9 +85,15 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    pref.edit().putBoolean("SWITCH_KEY", true).apply();
-                    saveNotifyUrl();
-                    enableNotify();
+                    if (manager.checkConditions()) {
+                        pref.edit().putBoolean("SWITCH_KEY", true).apply();
+
+                        saveNotifyUrl();
+                        enableNotify();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
+                        switchNotify.toggle();
+                    }
 
                 } else {
                     pref.edit().putBoolean("SWITCH_KEY", false).apply();

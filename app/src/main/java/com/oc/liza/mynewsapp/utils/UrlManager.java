@@ -38,7 +38,9 @@ public class UrlManager {
 
         if (search_begin_date != null && search_end_date != null) {
             beginDate = search_begin_date.getText().toString();
+           beginDate= beginDate.replace("/","");
             endDate = search_end_date.getText().toString();
+            endDate=endDate.replace("/","");
         } else {
             beginDate = "";
             endDate = "";

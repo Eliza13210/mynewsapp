@@ -6,6 +6,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
+import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsObject;
 
 import java.util.Timer;
@@ -27,7 +28,7 @@ public class NotificationTimerTask {
     }
 
     public void cancelNotification() {
-        if (timer!=null)
+        if (timer != null)
             timer.cancel();
     }
 
@@ -44,18 +45,19 @@ public class NotificationTimerTask {
                 disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
                     @Override
                     public void onNext(NewsObject news) {
-                        if (news.checkIfResult() > 0) {
-                            int hits = news.checkIfResult();
+                        // if (news.checkIfResult() > 0) {
+                        int hits = news.checkIfResult();
 
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                                    .setContentTitle("Notification")
-                                    .setContentText("Il y a " + hits + " nouveaux articles")
-                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_notify)
+                                .setContentTitle("Notification")
+                                .setContentText("Il y a " + hits + " articles")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
-                            notificationManager.notify(1, mBuilder.build());
-                        }
+                        notificationManager.notify(1, mBuilder.build());
                     }
+
 
                     @Override
                     public void onError(Throwable e) {
@@ -70,7 +72,6 @@ public class NotificationTimerTask {
         };
 
         timer.schedule(task, 0, 24 * 60 * 60 * 1000);
+
     }
-
-
 }
