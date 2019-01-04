@@ -61,6 +61,10 @@ public class NotificationActivity extends AppCompatActivity {
         switchIsChecked = pref.getBoolean("SWITCH_KEY", false);
         if (switchIsChecked) {
             switchNotify.setChecked(true);
+            query.setText(pref.getString("QUERY", null));
+            cbHealth.setChecked(pref.getBoolean("CB_HEALTH", false));
+            cbMovies.setChecked(pref.getBoolean("CB_MOVIES", false));
+            cbScience.setChecked(pref.getBoolean("CB_SCIENCE", false));
         }
     }
 
@@ -85,10 +89,9 @@ public class NotificationActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    manager.getUserInput(query, null, null, cbHealth, cbMovies, cbScience);
                     if (manager.checkConditions()) {
-                        pref.edit().putBoolean("SWITCH_KEY", true).apply();
-
-                        saveNotifyUrl();
+                        saveNotificationUrlAndState();
                         enableNotify();
                     } else {
                         Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
@@ -108,8 +111,15 @@ public class NotificationActivity extends AppCompatActivity {
         });
     }
 
-    private void saveNotifyUrl() {
-        manager.getUserInput(query, null, null, cbHealth, cbMovies, cbScience);
+    private void saveNotificationUrlAndState() {
+        // save user input and notification state
+        pref.edit().putBoolean("SWITCH_KEY", true).apply();
+        pref.edit().putString("QUERY", query.getText().toString()).apply();
+        pref.edit().putBoolean("CB_HEALTH", cbHealth.isChecked()).apply();
+        pref.edit().putBoolean("CB_SCIENCE", cbScience.isChecked()).apply();
+        pref.edit().putBoolean("CB_MOVIES", cbMovies.isChecked()).apply();
+
+        //save search url
         manager.createSearchUrl();
         manager.saveUrl("NOTIFY_URL");
     }
