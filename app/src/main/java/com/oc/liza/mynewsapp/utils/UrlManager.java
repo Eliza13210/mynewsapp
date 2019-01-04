@@ -12,11 +12,11 @@ import java.util.List;
 public class UrlManager {
     private Context context;
     private String url = "";
-    private String query = "";
-    private String beginDate;
-    private String endDate;
+    private String query;
+    private String beginDate = "";
+    private String endDate = "";
     private List<CheckBox> checkBoxList;
-    private String checkboxQuery = "";
+    private String checkboxQuery;
 
     public UrlManager(Context context) {
         this.context = context;
@@ -38,12 +38,9 @@ public class UrlManager {
 
         if (search_begin_date != null && search_end_date != null) {
             beginDate = search_begin_date.getText().toString();
-           beginDate= beginDate.replace("/","");
+            beginDate = beginDate.replace("/", "");
             endDate = search_end_date.getText().toString();
-            endDate=endDate.replace("/","");
-        } else {
-            beginDate = "";
-            endDate = "";
+            endDate = endDate.replace("/", "");
         }
         checkBoxList = new ArrayList<>();
         checkBoxList.add(cbHealth);
@@ -51,6 +48,7 @@ public class UrlManager {
         checkBoxList.add(cbScience);
         for (CheckBox box : checkBoxList) {
             if (box.isChecked()) {
+                checkboxQuery = "";
                 checkboxQuery += box.getText() + "%20";
             }
         }
@@ -62,8 +60,9 @@ public class UrlManager {
     public void createSearchUrl() {
 
         url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?&"
-                + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q="
-                + checkboxQuery;
+                + "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&fq=news_desk:("
+                + checkboxQuery
+                + ")&q=";
         if (!query.isEmpty())
             url += query;
         if (!beginDate.isEmpty()) {
@@ -90,6 +89,8 @@ public class UrlManager {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(sharedPrefKey, url);
         editor.apply();
+        checkboxQuery = null;
+        Log.e("search", url);
     }
 
     /**
@@ -98,7 +99,6 @@ public class UrlManager {
      * @return true if conditions are met
      */
     public boolean checkConditions() {
-        return (checkboxQuery != null || query != null);
+        return (checkboxQuery != null && !query.isEmpty());
     }
-
 }

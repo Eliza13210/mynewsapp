@@ -19,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reactivex.annotations.NonNull;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UrlManagerTest {
@@ -58,8 +59,39 @@ public class UrlManagerTest {
         manager.createSearchUrl();
         String url = manager.getUrl();
         assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=Science%20christmas&begin_date=20010101" +
+                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&fq=news_desk:(Science%20)&q=christmas&begin_date=20010101" +
                 "&end_date=20121212&sort=newest", url);
+    }
+
+    @Test
+    public void checkConditions_whenQueryIsEmpty_returnBooleanFalse() {
+        UrlManager manager = new UrlManager(context);
+        Mockito.when(search_query.getText()).thenReturn(new MockEditable(""));
+        Mockito.when(begin.getText()).thenReturn(new MockEditable("20010101"));
+        Mockito.when(end.getText()).thenReturn(new MockEditable("20121212"));
+
+        Mockito.when(cb1.isChecked()).thenReturn(true);
+        Mockito.when(cb2.isChecked()).thenReturn(false);
+        Mockito.when(cb3.isChecked()).thenReturn(false);
+
+        manager.getUserInput(search_query, begin, end, cb1, cb2, cb3);
+       assertFalse(manager.checkConditions());
+
+    }
+    @Test
+    public void checkConditions_whenCheckboxesAreNotChecked_returnBooleanFalse() {
+        UrlManager manager = new UrlManager(context);
+        Mockito.when(search_query.getText()).thenReturn(new MockEditable("chocolate"));
+        Mockito.when(begin.getText()).thenReturn(new MockEditable("20010101"));
+        Mockito.when(end.getText()).thenReturn(new MockEditable("20121212"));
+
+        Mockito.when(cb1.isChecked()).thenReturn(false);
+        Mockito.when(cb2.isChecked()).thenReturn(false);
+        Mockito.when(cb3.isChecked()).thenReturn(false);
+
+        manager.getUserInput(search_query, begin, end, cb1, cb2, cb3);
+        assertFalse(manager.checkConditions());
+
     }
 
     /**

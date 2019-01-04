@@ -59,11 +59,10 @@ public class SearchActivity extends AppCompatActivity {
         manager = new UrlManager(this);
 
         setSupportActionBar(toolbar);
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         search_query.setSelection(0);
         Objects.requireNonNull(this.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,17 +73,18 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * Let the manager take care of creating the url to search with the user input
-                 */
+
                 manager.getUserInput(search_query, search_begin_date, search_end_date, cbHealth, cbMovies, cbScience);
-                manager.createSearchUrl();
-                manager.saveUrl("SEARCH_KEY");
 
                 /**
                  * Start new activity to show results if the conditions are met
                  */
                 if (manager.checkConditions()) {
+                    /**
+                     * Let the manager take care of creating the url to search with the user input
+                     */
+                    manager.createSearchUrl();
+                    manager.saveUrl("SEARCH_KEY");
                     startActivity(new Intent(SearchActivity.this, SearchResultActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();

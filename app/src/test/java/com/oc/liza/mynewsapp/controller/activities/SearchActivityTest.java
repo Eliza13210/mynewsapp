@@ -42,4 +42,5 @@ public class SearchActivityTest {
         Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
         assertEquals(expectedIntent.getComponent(), actual.getComponent());
     }
+
 }

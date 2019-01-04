@@ -54,7 +54,7 @@ public class SearchResultFragment extends Fragment {
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         url = sharedPref.getString("SEARCH_KEY", null);
-        Log.e("resultA", url);
+
         this.configureRecyclerView();
         this.executeHttpRequestWithRetrofit();
 
