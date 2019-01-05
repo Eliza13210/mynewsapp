@@ -71,7 +71,7 @@ public class NotificationTimerTask {
             }
         };
 
-        timer.schedule(task, 0, 24 * 60 * 60 * 1000);
+        timer.schedule(task, 0, 86400);
 
     }
 }

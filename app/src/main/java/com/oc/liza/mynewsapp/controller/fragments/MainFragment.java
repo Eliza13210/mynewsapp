@@ -1,8 +1,11 @@
 package com.oc.liza.mynewsapp.controller.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +39,7 @@ public class MainFragment extends Fragment {
     private NewsAdapter adapter;
     private int position;
     private String url;
+    private SharedPreferences pref;
 
     public static MainFragment newInstance(int position) {
         MainFragment fragment = new MainFragment();
@@ -48,8 +52,12 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assert getArguments() != null;
-        position = getArguments().getInt("position", 0);
+        if (getArguments() != null) {
+            position = getArguments().getInt("position", 0);
+        } else {
+            position = 100;
+        }
+        Log.e("create", String.valueOf(position));
     }
 
     @Nullable
@@ -77,6 +85,7 @@ public class MainFragment extends Fragment {
 
     // 1 - Execute our Stream
     private void executeHttpRequestWithRetrofit() {
+        pref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
 
         switch (position) {
             case 0:
@@ -93,6 +102,10 @@ public class MainFragment extends Fragment {
                 break;
             case 4:
                 url = this.getResources().getString(R.string.movies_url);
+                break;
+            case 100:
+                url = pref.getString("SEARCH_KEY", null);
+                break;
         }
 
         //- Execute the stream subscribing to Observable defined inside NewsStream
@@ -124,8 +137,13 @@ public class MainFragment extends Fragment {
     // -------------------
 
     private void updateUIWithListOfNews(NewsObject news) {
-        newsList.addAll(news.getList());
-        adapter.notifyDataSetChanged();
+        if (news.checkIfResult() == 0) {
+            Snackbar.make(recyclerView, "Pas de résultat", Snackbar.LENGTH_LONG).show();
+
+        } else {
+            newsList.addAll(news.getList());
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

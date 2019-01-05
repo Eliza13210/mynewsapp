@@ -12,6 +12,10 @@ public class NewsObject {
     @Expose
     private ArrayList<News> results;
 
+    @SerializedName("num_results")
+    @Expose
+    private int num_results;
+
     //If NewsObject is from Article Search Api
     @SerializedName("response")
     @Expose
@@ -44,6 +48,14 @@ public class NewsObject {
         return results;
     }
 
+    public int getNum_results() {
+        return num_results;
+    }
+
+    public int setNum_results(int num_results) {
+        return this.num_results = num_results;
+    }
+
     public NewsObject getResponse() {
         return response;
     }
@@ -64,16 +76,20 @@ public class NewsObject {
         this.docs = docs;
     }
 
-    public NewsObject getMeta(){
+    public NewsObject getMeta() {
         return meta;
     }
 
-    public int getHits(){
+    public int getHits() {
         return hits;
 
     }
-    public int checkIfResult(){
-        return getResponse().getMeta().getHits();
-    }
 
+    public int checkIfResult() {
+        if (results == null) {
+            return getResponse().getMeta().getHits();
+        } else {
+            return getNum_results();
+        }
+    }
 }

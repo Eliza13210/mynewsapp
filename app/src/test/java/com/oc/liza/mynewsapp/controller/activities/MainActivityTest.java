@@ -1,7 +1,6 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Intent;
-import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
 

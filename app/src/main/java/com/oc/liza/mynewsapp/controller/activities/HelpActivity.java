@@ -43,7 +43,7 @@ public class HelpActivity extends AppCompatActivity {
         });
 
         Spanned about = (Html.fromHtml("<b>Comment utiliser l'application </b> <br/>"
-                + "<small> Faites un recherche parmi tous les articles de NY times sur Search <br/>"
+                + "<small> Faites une recherche parmi tous les articles de NY times sur Search <br/>"
                 + "Si vous activez les notifications, l'application ira vérifier une fois par jours s'il y a des news selon vos critères de recherche<br/>"
                 + "</small>"));
         text.setText(about);

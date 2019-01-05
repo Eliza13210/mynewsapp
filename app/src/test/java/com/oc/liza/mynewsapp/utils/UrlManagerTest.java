@@ -6,8 +6,6 @@ import android.text.InputFilter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.oc.liza.mynewsapp.utils.UrlManager;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
