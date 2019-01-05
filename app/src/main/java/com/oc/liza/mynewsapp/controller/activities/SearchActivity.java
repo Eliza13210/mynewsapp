@@ -22,9 +22,7 @@ import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity {
 
-    public String query;
-    public String url;
-    private UrlManager manager;
+    public UrlManager manager;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -78,7 +76,7 @@ public class SearchActivity extends AppCompatActivity {
                  */
                 if (manager.checkConditions()) {
                     /**
-                     * Let the manager take care of creating the url to search with the user input
+                     * Let the manager take care of creating the url with the user input
                      */
                     manager.createSearchUrl();
                     manager.saveUrl("SEARCH_KEY");

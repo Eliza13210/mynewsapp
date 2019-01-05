@@ -47,7 +47,13 @@ public class NewsSearch implements NewsItem {
 
     @Override
     public String getTitle() {
+
+        title=title.replaceAll("<p>","").replaceAll("</p>","");
         return title;
+    }
+
+    public void setTitle(String title){
+        this.title=title;
     }
 
     @Override
