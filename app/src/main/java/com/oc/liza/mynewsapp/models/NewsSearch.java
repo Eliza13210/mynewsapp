@@ -67,7 +67,10 @@ public class NewsSearch implements NewsItem {
 
     @Override
     public String getImageUrl() {
-        return multimedia.get(0).getUrl();
+        try{return multimedia.get(0).getUrl();
+        }catch (Exception e){
+            return "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg";
+        }
     }
 
     @Override

@@ -9,20 +9,22 @@ import android.util.Log;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsObject;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-public class NotificationTimerTask {
+public class NotificationService {
     private String CHANNEL_ID;
     private Context context;
     private Disposable disposable;
     private String url;
     private Timer timer;
 
-    public NotificationTimerTask(Context context) {
+    public NotificationService(Context context) {
         this.context = context;
         timer = new Timer();
     }
@@ -70,8 +72,9 @@ public class NotificationTimerTask {
                 });
             }
         };
+        Calendar today = Calendar.getInstance();
 
-        timer.schedule(task, 0, 86400);
+        timer.scheduleAtFixedRate(task, 0, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
 
     }
 }

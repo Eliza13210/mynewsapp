@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,7 +16,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.NotificationTimerTask;
+import com.oc.liza.mynewsapp.utils.NotificationService;
 import com.oc.liza.mynewsapp.utils.UrlManager;
 
 import java.util.Objects;
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 public class NotificationActivity extends AppCompatActivity {
 
     private UrlManager manager;
-    private NotificationTimerTask notify;
+    private NotificationService notify;
     private boolean switchIsChecked;
     private SharedPreferences pref;
 
@@ -126,7 +125,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     private void enableNotify() {
         Context context = getApplicationContext();
-        notify = new NotificationTimerTask(context);
+        notify = new NotificationService(context);
         notify.fetchNews();
     }
 }
