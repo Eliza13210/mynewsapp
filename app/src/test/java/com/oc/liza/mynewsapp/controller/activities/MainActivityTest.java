@@ -56,7 +56,7 @@ public class MainActivityTest {
     public void when_MenuItemAboutClicked_then_StartAboutActivity() {
         shadowOf(activity).clickMenuItem(R.id.action_about);
         Intent startedIntent = ShadowApplication.getInstance().getNextStartedActivity();
-        Intent exoectedIntent = new Intent(activity, AboutActivity.class);
+        Intent expectedIntent = new Intent(activity, AboutActivity.class);
         assertNotNull(startedIntent);
     }
 }

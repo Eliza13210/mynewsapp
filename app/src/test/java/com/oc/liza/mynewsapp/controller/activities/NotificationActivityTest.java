@@ -1,23 +1,23 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
-import android.widget.Switch;
-
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.utils.UrlManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 
 public class NotificationActivityTest {
 
     private NotificationActivity activity;
-    private Switch switchNotify;
 
     @Before
     public void setUp() throws Exception {
@@ -30,14 +30,17 @@ public class NotificationActivityTest {
     @Test
     public void shouldNotBeNull() throws Exception {
         assertNotNull(activity);
+
     }
 
     @Test
     public void switchShouldBeClickable() {
+        UrlManager manager = Mockito.mock(UrlManager.class);
+        activity.manager = manager;
+        when(manager.checkConditions()).thenReturn(true);
         activity.findViewById(R.id.switch_notify).performClick();
 
         assertTrue(activity.findViewById(R.id.switch_notify).isClickable());
-
     }
 
 }

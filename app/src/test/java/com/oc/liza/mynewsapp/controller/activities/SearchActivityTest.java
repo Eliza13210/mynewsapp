@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowActivity;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -45,8 +47,11 @@ public class SearchActivityTest {
         activity.findViewById(R.id.search_button).performClick();
 
         Intent expectedIntent = new Intent(activity, SearchResultActivity.class);
-        Intent actual = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
-        assertEquals(expectedIntent.getComponent(), actual.getComponent());
+        ShadowActivity shadowActivity  = Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+
+        assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
+        assertTrue(actualIntent.filterEquals(expectedIntent));
     }
 
 }

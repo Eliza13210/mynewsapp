@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity {
 
-    public UrlManager manager;
+    protected UrlManager manager;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

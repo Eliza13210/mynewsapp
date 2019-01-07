@@ -105,6 +105,6 @@ public class MainFragmentTest {
         assertNotNull(newsFetched);
         assertTrue(news.checkIfResult() != 0);
     }
-   
+
 }
 

@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class NotificationActivity extends AppCompatActivity {
 
-    private UrlManager manager;
+    protected UrlManager manager;
     private NotificationService notify;
     private boolean switchIsChecked;
     private SharedPreferences pref;
@@ -126,6 +126,6 @@ public class NotificationActivity extends AppCompatActivity {
     private void enableNotify() {
         Context context = getApplicationContext();
         notify = new NotificationService(context);
-        notify.fetchNews();
+        notify.createTimerTask();
     }
 }
