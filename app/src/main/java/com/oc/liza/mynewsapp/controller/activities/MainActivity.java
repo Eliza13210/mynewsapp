@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.controller.fragments.MainFragment;
 import com.oc.liza.mynewsapp.utils.MyFragmentPagerAdapter;
 
 import butterknife.BindView;
@@ -28,6 +29,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String CHANNEL_ID = "NOTIFICATION CHANNEL";
+    MyFragmentPagerAdapter fragmentPagerAdapter;
+
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -49,14 +52,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initMain();
         this.configureDrawerLayout();
         this.configureNavigationView();
-
         createNotificationChannel();
     }
 
     private void initMain() {
 
         setSupportActionBar(mToolbar);
-        MyFragmentPagerAdapter fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+       fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager.setAdapter(fragmentPagerAdapter);
@@ -132,6 +134,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.action_about:
                 // User chose the "About" action
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                break;
+            case R.id.action_science:
+                mViewPager.setCurrentItem(2);
+                break;
+            case R.id.action_health:
+                mViewPager.setCurrentItem(3);
+                break;
+            case R.id.action_movies:
+                mViewPager.setCurrentItem(4);
                 break;
             default:
                 // If we got here, the user's action was not recognized.

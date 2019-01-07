@@ -2,25 +2,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.oc.liza.mynewsapp.controller.activities.MainActivity">
+    <group android:id="@+id/menu_top"
+        >
 
-    <item
-        android:id="@+id/search"
-        android:title="@string/search_title"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_notifications"
-        android:orderInCategory="100"
-        android:title="@string/action_notifications"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_help"
-        android:orderInCategory="100"
-        android:title="@string/action_help"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_about"
-        android:orderInCategory="100"
-        android:title="@string/action_about"
-        app:showAsAction="never" />
+        <item
+            android:id="@+id/search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search_title"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_notifications"
+            android:icon="@drawable/ic_notify"
+            android:orderInCategory="100"
+            android:title="@string/action_notifications"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_help"
+            android:icon="@drawable/ic_help"
+            android:orderInCategory="100"
+            android:title="@string/action_help"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/ic_about"
+            android:orderInCategory="100"
+            android:title="@string/action_about"
+            app:showAsAction="never" />
+    </group>
+    <group android:id="@+id/menu_bottom">
+        <item
+            android:id="@+id/action_science"
+            android:icon="@drawable/ic_category"
+            android:orderInCategory="100"
+            android:title="@string/science"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_health"
+            android:icon="@drawable/ic_category"
+            android:orderInCategory="100"
+            android:title="@string/health"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_movies"
+            android:icon="@drawable/ic_category"
+            android:orderInCategory="100"
+            android:title="@string/movies"
+            app:showAsAction="never" />
+    </group>
 </menu>
