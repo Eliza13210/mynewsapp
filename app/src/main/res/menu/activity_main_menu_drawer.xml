@@ -1,52 +1,47 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.oc.liza.mynewsapp.controller.activities.MainActivity">
-    <group android:id="@+id/menu_top"
-        >
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/search"
             android:icon="@drawable/ic_search"
-            android:title="@string/search_title"
-            app:showAsAction="ifRoom" />
+            android:title="@string/search_title" />
         <item
             android:id="@+id/action_notifications"
             android:icon="@drawable/ic_notify"
             android:orderInCategory="100"
-            android:title="@string/action_notifications"
-            app:showAsAction="never" />
+            android:title="@string/action_notifications" />
         <item
             android:id="@+id/action_help"
             android:icon="@drawable/ic_help"
             android:orderInCategory="100"
-            android:title="@string/action_help"
-            app:showAsAction="never" />
+            android:title="@string/action_help" />
         <item
             android:id="@+id/action_about"
             android:icon="@drawable/ic_about"
             android:orderInCategory="100"
-            android:title="@string/action_about"
-            app:showAsAction="never" />
+            android:title="@string/action_about" />
     </group>
-    <group android:id="@+id/menu_bottom">
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/action_science"
             android:icon="@drawable/ic_category"
             android:orderInCategory="100"
-            android:title="@string/science"
-            app:showAsAction="never" />
+            android:title="@string/science" />
         <item
             android:id="@+id/action_health"
             android:icon="@drawable/ic_category"
             android:orderInCategory="100"
-            android:title="@string/health"
-            app:showAsAction="never" />
+            android:title="@string/health" />
         <item
             android:id="@+id/action_movies"
             android:icon="@drawable/ic_category"
             android:orderInCategory="100"
-            android:title="@string/movies"
-            app:showAsAction="never" />
+            android:title="@string/movies" />
     </group>
 </menu>
