@@ -17,8 +17,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
-    @BindView(R.id.info_text)
-    TextView text;
+    @BindView(R.id.info_text1)
+    TextView text_one;
+    @BindView(R.id.info_text2)
+    TextView text_two;
+    @BindView(R.id.title)
+    TextView title_view;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -32,9 +36,7 @@ public class AboutActivity extends AppCompatActivity {
 
     private void initAbout() {
         setSupportActionBar(toolbar);
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,10 +44,14 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        Spanned about = (Html.fromHtml("<b>-- My News App -- </b> <br/>"
-                + "<small> un projet Openclassrooms <br/>"
-                + "par Elisabet Boulanger <br/>"
-                + "Janvier 2019 </small>"));
-        text.setText(about);
-       }
+        //Set text to textviews
+        Spanned title = (Html.fromHtml("My News App <br/>"
+                + "<small><i> un projet Openclassrooms </i></small><br/>"));
+        Spanned about = (Html.fromHtml(
+                "par Elisabet Boulanger <br/>"
+                        + "Janvier 2019"));
+
+        title_view.setText(title);
+        text_one.setText(about);
+    }
 }

@@ -17,8 +17,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HelpActivity extends AppCompatActivity {
-    @BindView(R.id.info_text)
-    TextView text;
+    @BindView(R.id.info_text1)
+    TextView text_one;
+    @BindView(R.id.info_text2)
+    TextView text_two;
+    @BindView(R.id.title)
+    TextView title_view;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -42,10 +46,18 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
-        Spanned about = (Html.fromHtml("<b>Comment utiliser l'application </b> <br/>"
-                + "<small> Faites une recherche parmi tous les articles de NY times sur Search <br/>"
-                + "Si vous activez les notifications, l'application ira vérifier une fois par jours s'il y a des news selon vos critères de recherche<br/>"
-                + "</small>"));
-        text.setText(about);
+        //Set text to textviews
+        Spanned search = (Html.fromHtml("<b>Fonctions de l'application </b><br><br><small><i>Search</i> " +
+                "<br>Faites une recherche parmi tous les articles de NY times</small>"));
+
+       // Spanned title="Fonctions de l'application <br>"+search;
+
+
+        Spanned notify=(Html.fromHtml("<i>Notification</i><br> Activez les notifications, l'application ira vérifier" +
+                        " une fois par jour s'il y a des news selon vos critères de recherche</small>"));
+
+        title_view.setText(search);
+        text_one.setText(notify);
+       // text_two.setText(notify);
     }
 }

@@ -14,12 +14,35 @@
 
 
     <TextView
-        android:id="@+id/info_text"
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:lineSpacingExtra="2dp"
+        android:textSize="@dimen/info_text_size"
+        android:padding="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/info_text1"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:lineSpacingExtra="1.5dp"
-        android:textSize="@dimen/info_text_size"
+        android:textSize="@dimen/text_size"
+        android:padding="@dimen/text_size"
+        />
+    <TextView
+        android:id="@+id/info_text2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:lineSpacingExtra="1.5dp"
+        android:textSize="@dimen/text_size"
+        android:padding="@dimen/text_size"
         />
 
 </LinearLayout>
