@@ -88,7 +88,7 @@
         android:layout_gravity="start"
         android:background="@color/colorWhite"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/activity_main_nav_header"
+        app:headerLayout="@layout/drawer_nav_header"
         app:menu="@menu/activity_main_menu_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

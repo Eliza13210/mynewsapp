@@ -34,13 +34,14 @@ public class NotificationActivityTest {
     }
 
     @Test
-    public void switchShouldBeClickable() {
+    public void clickSwitch_whenConditionsAreOk_thenCreateNotificationService() {
         UrlManager manager = Mockito.mock(UrlManager.class);
         activity.manager = manager;
         when(manager.checkConditions()).thenReturn(true);
         activity.findViewById(R.id.switch_notify).performClick();
 
         assertTrue(activity.findViewById(R.id.switch_notify).isClickable());
+        assertTrue(activity.notify!=null);
     }
 
 }

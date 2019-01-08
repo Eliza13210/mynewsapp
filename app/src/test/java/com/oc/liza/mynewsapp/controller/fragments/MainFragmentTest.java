@@ -47,11 +47,11 @@ public class MainFragmentTest {
     @Test
     public void fetchTopStoriesTest() throws Exception {
         //1 - Get the stream
-        Observable<NewsObject> observableUsers = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/topstories/v2/home.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
+        Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/topstories/v2/home.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
         //2 - Create a new TestObserver
         TestObserver<NewsObject> testObserver = new TestObserver<>();
         //3 - Launch observable
-        observableUsers.subscribeWith(testObserver)
+        observable.subscribeWith(testObserver)
                 .assertNoErrors() // 3.1 - Check if no errors
                 .assertNoTimeout() // 3.2 - Check if no Timeout
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
@@ -68,11 +68,11 @@ public class MainFragmentTest {
     @Test
     public void fetchMostPopularStoriesTest() throws Exception {
         //1 - Get the stream
-        Observable<NewsObject> observableUsers = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
+        Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
         //2 - Create a new TestObserver
         TestObserver<NewsObject> testObserver = new TestObserver<>();
         //3 - Launch observable
-        observableUsers.subscribeWith(testObserver)
+        observable.subscribeWith(testObserver)
                 .assertNoErrors() // 3.1 - Check if no errors
                 .assertNoTimeout() // 3.2 - Check if no Timeout
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
@@ -88,11 +88,11 @@ public class MainFragmentTest {
     @Test
     public void fetchSearchNewsTest() throws Exception {
         //1 - Get the stream
-        Observable<NewsObject> observableUsers = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=science");
+        Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=science");
         //2 - Create a new TestObserver
         TestObserver<NewsObject> testObserver = new TestObserver<>();
         //3 - Launch observable
-        observableUsers.subscribeWith(testObserver)
+        observable.subscribeWith(testObserver)
                 .assertNoErrors() // 3.1 - Check if no errors
                 .assertNoTimeout() // 3.2 - Check if no Timeout
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue

@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 public class NotificationActivity extends AppCompatActivity {
 
     protected UrlManager manager;
-    private NotificationService notify;
+    protected NotificationService notify;
     private SharedPreferences pref;
 
     @BindView(R.id.toolbar)

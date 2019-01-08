@@ -9,37 +9,50 @@ import android.util.Log;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsObject;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
+
 
 public class NotificationService {
 
     private Disposable disposable;
     private String CHANNEL_ID;
     private final Context context;
-    final Timer timer;
-    TimerTask task;
+    ScheduledExecutorService scheduler;
+    Future<?> f;
+
 
     public NotificationService(Context context) {
         this.context = context;
-        timer = new Timer();
     }
 
     public void cancelNotification() {
-        timer.cancel();
+        //f.cancel(true);
+        if(scheduler!=null)
+        scheduler.shutdownNow();
+
     }
 
     public void createTimerTask() {
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                fetchNews();
-            }
-        };
-        timer.scheduleAtFixedRate(task, 0, 1000*60*5);
+
+        scheduler =
+                Executors.newScheduledThreadPool(1);
+             final Runnable runnable = new Runnable() {
+
+                 public void run() {
+                     // call service
+                     fetchNews();
+                 }
+            };
+
+         f=scheduler.scheduleAtFixedRate
+                (runnable, 0, 10, TimeUnit.MINUTES);
+
     }
 
     private void fetchNews() {
@@ -50,8 +63,7 @@ public class NotificationService {
           disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
             @Override
             public void onNext(NewsObject news) {
-                // if (news.checkIfResult() > 0) {
-                int hits = news.checkIfResult();
+                 int hits = news.checkIfResult();
 
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_notify)

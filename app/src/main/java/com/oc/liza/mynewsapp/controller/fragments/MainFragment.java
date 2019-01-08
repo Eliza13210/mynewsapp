@@ -41,6 +41,13 @@ public class MainFragment extends Fragment {
     private String url;
     private SharedPreferences pref;
 
+    /**
+     * Create new instance is called from the Pager adapter
+     * Put the position in the bundle so it can be called in OnCreate method
+     *
+     * @param position the position from the viewpager
+     * @return the fragment
+     */
     public static MainFragment newInstance(int position) {
         MainFragment fragment = new MainFragment();
         Bundle bundle = new Bundle();
@@ -48,6 +55,13 @@ public class MainFragment extends Fragment {
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    /**
+     * Check if the bundle contains the position in order to define the URL
+     * otherwise set position to 100
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +71,6 @@ public class MainFragment extends Fragment {
         } else {
             position = 100;
         }
-        Log.e("create", String.valueOf(position));
     }
 
     @Nullable
@@ -83,7 +96,10 @@ public class MainFragment extends Fragment {
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    // 1 - Execute our Stream
+    /**
+     * Define the url depending on the position
+     * and fetch the stream
+     */
     private void executeHttpRequestWithRetrofit() {
         pref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
 
