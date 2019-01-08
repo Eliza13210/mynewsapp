@@ -29,7 +29,6 @@ public class NotificationActivity extends AppCompatActivity {
 
     protected UrlManager manager;
     private NotificationService notify;
-    private boolean switchIsChecked;
     private SharedPreferences pref;
 
     @BindView(R.id.toolbar)
@@ -57,7 +56,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void isSwitchChecked() {
-        switchIsChecked = pref.getBoolean("SWITCH_KEY", false);
+        boolean switchIsChecked = pref.getBoolean("SWITCH_KEY", false);
         if (switchIsChecked) {
             switchNotify.setChecked(true);
             query.setText(pref.getString("QUERY", null));
@@ -127,5 +126,11 @@ public class NotificationActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         notify = new NotificationService(context);
         notify.createTimerTask();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        notify.disposeWhenDestroy();
     }
 }

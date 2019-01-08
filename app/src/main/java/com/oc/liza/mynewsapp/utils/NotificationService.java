@@ -11,18 +11,17 @@ import com.oc.liza.mynewsapp.models.NewsObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 public class NotificationService {
-    private String CHANNEL_ID;
-    private Context context;
+
     private Disposable disposable;
-    private String url;
-    protected Timer timer;
-    protected TimerTask task;
+    private String CHANNEL_ID;
+    private final Context context;
+    final Timer timer;
+    TimerTask task;
 
     public NotificationService(Context context) {
         this.context = context;
@@ -30,8 +29,7 @@ public class NotificationService {
     }
 
     public void cancelNotification() {
-        if (timer != null)
-            timer.cancel();
+        timer.cancel();
     }
 
     public void createTimerTask() {
@@ -41,15 +39,15 @@ public class NotificationService {
                 fetchNews();
             }
         };
-        timer.scheduleAtFixedRate(task, 0, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+        timer.scheduleAtFixedRate(task, 0, 1000*60*5);
     }
 
     private void fetchNews() {
 
         SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-        url = sharedPref.getString("NOTIFY_URL", null);
+        String url = sharedPref.getString("NOTIFY_URL", null);
         CHANNEL_ID = sharedPref.getString("CHANNEL_KEY", null);
-        disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
+          disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
             @Override
             public void onNext(NewsObject news) {
                 // if (news.checkIfResult() > 0) {
@@ -76,4 +74,8 @@ public class NotificationService {
             }
         });
     }
+    public void disposeWhenDestroy() {
+        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+    }
+
 }
