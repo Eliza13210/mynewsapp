@@ -9,6 +9,10 @@ class MediaImage {
     private String url;
 
     public String getUrl() {
+        if (!url.startsWith("https://static01.nyt.com/")) {
+            String new_url = "https://static01.nyt.com/" + url;
+            url = new_url;
+        }
         return url;
     }
 

@@ -41,7 +41,7 @@ public class NotificationActivityTest {
         activity.findViewById(R.id.switch_notify).performClick();
 
         assertTrue(activity.findViewById(R.id.switch_notify).isClickable());
-        assertTrue(activity.notify!=null);
+
     }
 
 }

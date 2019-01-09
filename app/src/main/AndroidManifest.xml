@@ -3,6 +3,9 @@
     package="com.oc.liza.mynewsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+
 
     <application
         android:allowBackup="true"
@@ -50,6 +53,17 @@
             android:label="About"
             android:parentActivityName=".controller.activities.MainActivity"
             android:theme="@style/SearchTheme"/>
+        <receiver android:name=".utils.NotificationBroadcastReceiver" >
+        </receiver>
+        <receiver android:name=".utils.NotificationAutoStart">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".utils.NotificationService"
+            android:exported="false" >
+        </service>
 
     </application>
 
