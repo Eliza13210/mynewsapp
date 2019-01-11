@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.controller.fragments.MainFragment;
 import com.oc.liza.mynewsapp.utils.MyFragmentPagerAdapter;
 
 import butterknife.BindView;
@@ -29,8 +28,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String CHANNEL_ID = "NOTIFICATION CHANNEL";
-    MyFragmentPagerAdapter fragmentPagerAdapter;
-
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -56,15 +53,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initMain() {
-
+        //Initiate toolbar
         setSupportActionBar(mToolbar);
-       fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
+        // Set up the ViewPager with the sections adapter to navigate between the tabs
+        MyFragmentPagerAdapter fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(fragmentPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
     }
 
     // Configure Drawer Layout
@@ -84,14 +80,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // 3 - Configure NavigationView
+    // Configure NavigationView
     private void configureNavigationView() {
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         startActivity(item);
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -113,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * Handle user click in drawer menu and action bar menu
+     *
+     * @param item the user clicked on
+     */
     private void startActivity(MenuItem item) {
         int id = item.getItemId();
 
@@ -136,12 +136,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
                 break;
             case R.id.action_science:
+                // User chose the "Science" tab
                 mViewPager.setCurrentItem(2);
                 break;
             case R.id.action_health:
+                // User chose the "Health" tab
                 mViewPager.setCurrentItem(3);
                 break;
             case R.id.action_movies:
+                // User chose the "Movies" tab
                 mViewPager.setCurrentItem(4);
                 break;
             default:
@@ -163,8 +166,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
+        //Save the Channel Id in shared preferences
         SharedPreferences preferences = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
         edit.putString("CHANNEL_KEY", CHANNEL_ID).apply();

@@ -35,6 +35,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void initAbout() {
+        //Set toolbar with navigation back to main activity
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -44,7 +45,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        //Set text to textviews
+        //Set text to text views
         Spanned title = (Html.fromHtml("My News App <br/>"
                 + "<small><i> un projet Openclassrooms </i></small><br/>"));
         Spanned about = (Html.fromHtml(

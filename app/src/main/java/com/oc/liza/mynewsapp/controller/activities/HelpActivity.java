@@ -35,10 +35,9 @@ public class HelpActivity extends AppCompatActivity {
     }
 
     private void initHelp() {
+        //Set toolbar and navigation back to Main activity
         setSupportActionBar(toolbar);
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,18 +45,14 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
-        //Set text to textviews
+        //Set text to text views
         Spanned search = (Html.fromHtml("<b>Fonctions de l'application </b><br><br><small><i>Search</i> " +
                 "<br>Faites une recherche parmi tous les articles de NY times</small>"));
 
-       // Spanned title="Fonctions de l'application <br>"+search;
-
-
-        Spanned notify=(Html.fromHtml("<i>Notification</i><br> Activez les notifications, l'application ira vérifier" +
-                        " une fois par jour s'il y a des news selon vos critères de recherche</small>"));
+        Spanned notify = (Html.fromHtml("<i>Notification</i><br> Activez les notifications, l'application ira vérifier" +
+                " une fois par jour s'il y a des news selon vos critères de recherche</small>"));
 
         title_view.setText(search);
         text_one.setText(notify);
-       // text_two.setText(notify);
     }
 }

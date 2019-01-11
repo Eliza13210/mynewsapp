@@ -26,7 +26,7 @@ public class SearchActivityTest {
     private SearchActivity activity;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         activity = Robolectric.buildActivity(SearchActivity.class)
                 .create()
                 .resume()
@@ -34,7 +34,7 @@ public class SearchActivityTest {
     }
 
     @Test
-    public void testActivityExists() throws Exception {
+    public void testActivityExists() {
         assertNotNull(shadowOf(RuntimeEnvironment.application));
         assertTrue(Robolectric.setupActivity(SearchActivity.class) != null);
     }
