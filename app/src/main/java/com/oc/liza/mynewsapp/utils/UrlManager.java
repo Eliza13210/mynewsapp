@@ -15,7 +15,6 @@ public class UrlManager {
     private String query;
     private String beginDate = "";
     private String endDate = "";
-    private List<CheckBox> checkBoxList;
     private String checkboxQuery;
 
     public UrlManager(Context context) {
@@ -42,7 +41,7 @@ public class UrlManager {
             endDate = search_end_date.getText().toString();
             endDate = endDate.replace("/", "");
         }
-        checkBoxList = new ArrayList<>();
+        List<CheckBox> checkBoxList = new ArrayList<>();
         checkBoxList.add(cbHealth);
         checkBoxList.add(cbMovies);
         checkBoxList.add(cbScience);

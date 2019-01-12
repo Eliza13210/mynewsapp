@@ -15,7 +15,6 @@
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
 
-    <string name="search">Search</string>
     <string name="end_date">End date</string>
     <string name="begin_date">Begin date</string>
     <string name="date_ex">2012/12/31</string>
@@ -30,8 +29,6 @@
     <string name="enable_notify">Enable notifications (once per day)</string>
     <string name="thumbnail">thumbnail</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="channel_name">channel</string>
-    <string name="channel_description">channel description</string>
+     <string name="channel_name">my news</string>
+    <string name="channel_description">notification</string>
 </resources>

@@ -15,6 +15,5 @@ public class NewsStream {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(10, TimeUnit.SECONDS);
-
     }
 }

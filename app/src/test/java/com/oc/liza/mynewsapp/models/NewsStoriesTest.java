@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class NewsTest {
+public class NewsStoriesTest {
 
-    private News news = new News();
+    private NewsStories news = new NewsStories();
     private NewsImage newsImage = new NewsImage();
 
     @Test

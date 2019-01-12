@@ -36,22 +36,34 @@ public class SearchActivityTest {
     @Test
     public void testActivityExists() {
         assertNotNull(shadowOf(RuntimeEnvironment.application));
-        assertTrue(Robolectric.setupActivity(SearchActivity.class) != null);
+        assertNotNull(Robolectric.setupActivity(SearchActivity.class));
     }
 
     @Test
-    public void clickingSearchButton_shouldStartSearchResultActivity() {
+    public void clickingSearchButton_whenConditionsAreMet_thenStartSearchResultActivity() {
         UrlManager manager = Mockito.mock(UrlManager.class);
         activity.manager = manager;
         when(manager.checkConditions()).thenReturn(true);
         activity.findViewById(R.id.search_button).performClick();
 
         Intent expectedIntent = new Intent(activity, SearchResultActivity.class);
-        ShadowActivity shadowActivity  = Shadows.shadowOf(activity);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
 
         assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
         assertTrue(actualIntent.filterEquals(expectedIntent));
+    }
+
+    @Test
+    public void clickingSearchButton_whenConditionsAreNotMet_thenDontStartActivity() {
+        UrlManager manager = Mockito.mock(UrlManager.class);
+        activity.manager = manager;
+        when(manager.checkConditions()).thenReturn(false);
+        activity.findViewById(R.id.search_button).performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+        assertNull(actualIntent);
     }
 
 }

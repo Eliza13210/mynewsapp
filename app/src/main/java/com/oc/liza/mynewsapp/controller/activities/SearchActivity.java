@@ -1,7 +1,6 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -53,10 +52,12 @@ public class SearchActivity extends AppCompatActivity {
     private void initLayout() {
         manager = new UrlManager(this);
 
-        setSupportActionBar(toolbar);
+        //Open the keyboard automatically
         search_query.setSelection(0);
         Objects.requireNonNull(this.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+        //Toolbar to navigate back to Main activity
+        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,13 +72,10 @@ public class SearchActivity extends AppCompatActivity {
 
                 manager.getUserInput(search_query, search_begin_date, search_end_date, cbHealth, cbMovies, cbScience);
 
-                /**
-                 * Start new activity to show results if the conditions are met
-                 */
+                // Start new activity to show results if the conditions are met
                 if (manager.checkConditions()) {
-                    /**
-                     * Let the manager take care of creating the url with the user input
-                     */
+
+                    //Let the manager take care of creating the url with the user input
                     manager.createSearchUrl();
                     manager.saveUrl("SEARCH_KEY");
                     startActivity(new Intent(SearchActivity.this, SearchResultActivity.class));

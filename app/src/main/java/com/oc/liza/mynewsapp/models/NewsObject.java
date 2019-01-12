@@ -5,26 +5,30 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+
+//This is the object that will be received from the API request
 public class NewsObject {
 
-    //If NewsObject is from Top stories or Most Popular Api
+    //List of news if NewsObject is from Top stories or Most Popular Api
     @SerializedName("results")
     @Expose
-    private ArrayList<News> results;
+    private ArrayList<NewsStories> results;
 
+    //Number of hits
     @SerializedName("num_results")
     @Expose
     private int num_results;
 
-    //If NewsObject is from Article Search Api
-    @SerializedName("response")
-    @Expose
-    private NewsObject response;
-
+    //List of news if NewsObject is from Article Search Api
     @SerializedName("docs")
     @Expose
     private ArrayList<NewsSearch> docs;
 
+    @SerializedName("response")
+    @Expose
+    private NewsObject response;
+
+    //Number of hits from Article Search
     @SerializedName("meta")
     @Expose
     private NewsObject meta;
@@ -33,9 +37,8 @@ public class NewsObject {
     @Expose
     private int hits;
 
-    public NewsObject() {
-    }
 
+    //Get the list of news depending on which type of API Request
     public ArrayList getList() {
         if (results == null) {
             return response.getDocs();
@@ -44,7 +47,7 @@ public class NewsObject {
         }
     }
 
-    public ArrayList<News> getResults() {
+    public ArrayList<NewsStories> getResults() {
         return results;
     }
 
@@ -64,7 +67,7 @@ public class NewsObject {
         return docs;
     }
 
-    public void setResults(ArrayList<News> results) {
+    public void setResults(ArrayList<NewsStories> results) {
         this.results = results;
     }
 
@@ -85,6 +88,7 @@ public class NewsObject {
 
     }
 
+    //Get the number of hits depending on the API request
     public int checkIfResult() {
         if (results == null) {
             return getResponse().getMeta().getHits();

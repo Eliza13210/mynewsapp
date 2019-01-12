@@ -22,6 +22,7 @@ import com.oc.liza.mynewsapp.views.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +35,7 @@ public class MainFragment extends Fragment {
     RecyclerView recyclerView; // 1 - Declare RecyclerView
 
     private Disposable disposable;
-    // 2 - Declare list of news (News) & Adapter
+    // 2 - Declare list of news (NewsStories) & Adapter
     private List<NewsItem> newsList;
     private NewsAdapter adapter;
     private int position;
@@ -66,9 +67,13 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //position come from PagerAdapter (tabs)
         if (getArguments() != null) {
             position = getArguments().getInt("position", 0);
-        } else {
+        }
+        //position if fragment is from search activity result
+        else {
             position = 100;
         }
     }
@@ -101,7 +106,7 @@ public class MainFragment extends Fragment {
      * and fetch the stream
      */
     private void executeHttpRequestWithRetrofit() {
-        pref = getActivity().getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        pref = Objects.requireNonNull(getActivity()).getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
 
         switch (position) {
             case 0:

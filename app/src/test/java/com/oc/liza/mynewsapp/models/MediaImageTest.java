@@ -13,6 +13,7 @@ public class MediaImageTest {
         String testUrl = "http://www.google.com";
         mediaImage.setUrl(testUrl);
         String url = mediaImage.getUrl();
+
         assertNotNull(mediaImage);
         assertEquals(url, testUrl);
     }

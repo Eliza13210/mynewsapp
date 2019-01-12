@@ -11,13 +11,13 @@ public class NotificationService extends Service {
     public void onCreate()
     {
         super.onCreate();
-        Log.e("service", "oncreate service");
+        Log.e("service", "on create service");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        Log.e("service", "Onstartcommande setAlarm");
+        Log.e("service", "On start command setAlarm");
         alarm.setAlarm(this);
         return START_STICKY;
     }
@@ -26,7 +26,7 @@ public class NotificationService extends Service {
     public void onStart(Intent intent, int startId)
     {
         alarm.setAlarm(this);
-        Log.e("service", "onstart setAlarm");
+        Log.e("service", "on start setAlarm");
     }
 
     @Override

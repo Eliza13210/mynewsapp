@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+//Object from Article search API
 public class NewsSearch implements NewsItem {
 
     @SerializedName("web_url")
@@ -47,13 +48,12 @@ public class NewsSearch implements NewsItem {
 
     @Override
     public String getTitle() {
-
-        title=title.replaceAll("<p>","").replaceAll("</p>","");
+        title = title.replaceAll("<p>", "").replaceAll("</p>", "");
         return title;
     }
 
-    public void setTitle(String title){
-        this.title=title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -67,8 +67,9 @@ public class NewsSearch implements NewsItem {
 
     @Override
     public String getImageUrl() {
-        try{return multimedia.get(0).getUrl();
-        }catch (Exception e){
+        try {
+            return multimedia.get(0).getUrl();
+        } catch (Exception e) {
             return "https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg";
         }
     }
@@ -92,7 +93,6 @@ public class NewsSearch implements NewsItem {
             str += section;
         } else if (headline.getMain() != null) {
             str += headline.getMain();
-        } else {
         }
         return str;
     }
@@ -128,5 +128,9 @@ public class NewsSearch implements NewsItem {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    public void setSubsection(String subsection) {
+        this.subsection = subsection;
     }
 }

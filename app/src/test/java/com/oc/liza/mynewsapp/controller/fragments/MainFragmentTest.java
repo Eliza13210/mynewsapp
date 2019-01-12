@@ -25,6 +25,7 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class MainFragmentTest {
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -38,14 +39,11 @@ public class MainFragmentTest {
 
     @AfterClass
     public static void tearDownClass() {
-
-        // Not strictly necessary because we can't reset the value set by setInitMainThreadSchedulerHandler,
-        // but it doesn't hurt to clean up anyway.
         RxAndroidPlugins.reset();
     }
 
     @Test
-    public void fetchTopStoriesTest() throws Exception {
+    public void fetchTopStoriesTest() {
         //1 - Get the stream
         Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/topstories/v2/home.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
         //2 - Create a new TestObserver
@@ -66,7 +64,7 @@ public class MainFragmentTest {
     }
 
     @Test
-    public void fetchMostPopularStoriesTest() throws Exception {
+    public void fetchMostPopularStoriesTest() {
         //1 - Get the stream
         Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0");
         //2 - Create a new TestObserver
@@ -86,7 +84,7 @@ public class MainFragmentTest {
         assertTrue(news.checkIfResult() != 0);
     }
     @Test
-    public void fetchSearchNewsTest() throws Exception {
+    public void fetchSearchNewsTest() {
         //1 - Get the stream
         Observable<NewsObject> observable = NewsStream.streamFetchNewslist("https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&q=science");
         //2 - Create a new TestObserver

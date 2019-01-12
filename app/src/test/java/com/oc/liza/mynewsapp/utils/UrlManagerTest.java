@@ -45,8 +45,8 @@ public class UrlManagerTest {
     public void getUrl_WhenSearchQueryAndDates_ThenReturnUrl() {
         UrlManager manager = new UrlManager(context);
         Mockito.when(search_query.getText()).thenReturn(new MockEditable("christmas"));
-        Mockito.when(begin.getText()).thenReturn(new MockEditable("20010101"));
-        Mockito.when(end.getText()).thenReturn(new MockEditable("20121212"));
+        Mockito.when(begin.getText()).thenReturn(new MockEditable("2001/01/01"));
+        Mockito.when(end.getText()).thenReturn(new MockEditable("2012/12/12"));
 
         Mockito.when(cb3.getText()).thenReturn(new MockEditable("Science"));
         Mockito.when(cb1.isChecked()).thenReturn(false);

@@ -34,7 +34,7 @@ public class NotificationActivity extends AppCompatActivity {
     protected UrlManager manager;
     private SharedPreferences pref;
     Context context;
-    Intent i;
+    protected Intent intent;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -57,7 +57,6 @@ public class NotificationActivity extends AppCompatActivity {
         pref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         isSwitchChecked();
         initNotification();
-
     }
 
     /**
@@ -80,7 +79,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     /**
      * Set the toolbar to be able to navigate back to Main activity
-     * Use URLmanager to save the search url with the user input
+     * Use URL manager to save the search url with the user input
      * Set listener to switch
      */
     private void initNotification() {
@@ -117,7 +116,7 @@ public class NotificationActivity extends AppCompatActivity {
                         switchNotify.toggle();
                     }
                 }
-                //If switch is not checked
+                //If switch unchecked
                 else {
                     cancelAlarm();
                 }
@@ -144,11 +143,19 @@ public class NotificationActivity extends AppCompatActivity {
      * Start a service to run a scheduled notification
      */
     private void enableNotification() {
-        context = getApplicationContext();
-        i = new Intent(context, NotificationService.class);
-        context.startService(i);
+        context=getApplicationContext();
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(context, NotificationBroadcastReceiver.class);
+        PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
+        assert am != null;
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pi);
 
-        Log.e("NotA", "enablenotify");
+        Log.e("NotA", "enable notify");
+        /**
+        context = getApplicationContext();
+        intent = new Intent(context, NotificationService.class);
+        context.startService(intent);*/
+
     }
 
     /**
@@ -170,7 +177,7 @@ public class NotificationActivity extends AppCompatActivity {
         am.cancel(pi);
 
         //Stop the service
-        context.stopService(i);
-        Log.e("NotA", "cancel alarmmanager");
+//        context.stopService(i);
+        Log.e("NotA", "cancel alarm manager");
     }
 }

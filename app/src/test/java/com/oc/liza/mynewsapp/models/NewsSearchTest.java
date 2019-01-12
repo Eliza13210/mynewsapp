@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class NewsSearchTest {
 
-    NewsSearch newsSearch = new NewsSearch();
+    private NewsSearch newsSearch = new NewsSearch();
 
     @Test
     public void getPublished_date_DateIsNull_ReturnNoDate() {

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class NewsObjectTest {
-    private ArrayList<News> results;
+    private ArrayList<NewsStories> results;
     private NewsObject news;
     private ArrayList<NewsSearch> docs;
     private NewsObject response;
@@ -40,7 +40,7 @@ public class NewsObjectTest {
         response.setDocs(docs);
 
         results = new ArrayList<>();
-        results.add(new News());
+        results.add(new NewsStories());
         news.setResults(results);
 
         assertSame(news.getList(), results);
@@ -50,7 +50,7 @@ public class NewsObjectTest {
     public void checkIfResult() {
         news=new NewsObject();
         results = new ArrayList<>();
-        results.add(new News());
+        results.add(new NewsStories());
         news.setResults(results);
         news.setNum_results(2);
         

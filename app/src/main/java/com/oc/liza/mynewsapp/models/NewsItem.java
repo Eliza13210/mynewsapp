@@ -1,11 +1,16 @@
 package com.oc.liza.mynewsapp.models;
 
+//These are the data we want to show in our recycler view
 public interface NewsItem {
 
-    public String getTitle();
-    public String getPublished_date();
-    public String getImageUrl();
-    public String getUrl();
-    public String sectionAndSubsectionString();
+    String getTitle();
+
+    String getPublished_date();
+
+    String getImageUrl();
+
+    String getUrl();
+
+    String sectionAndSubsectionString();
 
 }

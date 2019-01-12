@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class News implements NewsItem {
+public class NewsStories implements NewsItem {
     @SerializedName("section")
     @Expose
     private String section;

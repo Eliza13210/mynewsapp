@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsObject;
@@ -20,11 +21,10 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
     private Disposable disposable;
     private String CHANNEL_ID;
-    private Context context;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        this.context = context;
+        Toast.makeText(context,"alarm", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         String url = sharedPref.getString("NOTIFY_URL", null);
         CHANNEL_ID = sharedPref.getString("CHANNEL_KEY", null);
@@ -55,25 +55,18 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
             }
         });
         Log.e("cast", "Here's my code to execute 15 min");
+        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+
     }
 
     public void setAlarm(Context context) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NotificationBroadcastReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
+        assert am != null;
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pi);
 
-        Log.e("NotA", "enablenotify");
-    }
-
-    public void cancelAlarm(Context context) {
-        Intent intent = new Intent(context, NotificationBroadcastReceiver.class);
-        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(sender);
-    }
-    public void disposeWhenDestroy() {
-        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+        Log.e("NotA", "enable notify");
     }
 
 }
