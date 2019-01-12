@@ -1,4 +1,6 @@
 language: android
+jdk: oraclejdk8
+
 env:
   global:
     - ANDROID_API_LEVEL=27
@@ -22,12 +24,16 @@ licenses:
   - google-gdk-license-.+ 
 before_install:
   - yes | sdkmanager "platforms;android-28"
-  - chmod +x gradlew
+ 
 before_script:
+  - chmod +x gradlew
+  - ./gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t "android-"$ANDROID_EMULATOR_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
-script:
-   - ./gradlew build connectedCheck --stacktrace
+  - ./gradlew connectedCheck
+  
+  after_success:
+  - bash <(curl -s https://codecov.io/bash)
   
