@@ -5,4 +5,5 @@
     <color name="colorAccent">#ffea00</color>
     <color name="colorWhite">#ffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorPressed">#f5f1f1</color>
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +18,9 @@ import butterknife.ButterKnife;
 
 
 class NewsViewHolder extends RecyclerView.ViewHolder {
+
+    private SharedPreferences sharedPref;
+
     @BindView(R.id.fragment_item_title)
     TextView title;
     @BindView(R.id.fragment_date)
@@ -29,7 +31,7 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
     ImageView thumbnail;
 
 
-    public NewsViewHolder(View itemView) {
+    NewsViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
@@ -40,27 +42,36 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
         this.date.setText(newsItem.getPublished_date());
         this.section.setText(newsItem.sectionAndSubsectionString());
 
-        loadPhoto(newsItem,context);
-        startWebview(newsItem,context);
+        //Load photo and make article clickable
+        loadPhoto(newsItem, context);
+        startWebview(newsItem, context);
+
+        //Check if the user has already clicked on the article, then change background color
+        sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        if (sharedPref.getBoolean(newsItem.getTitle(), false)) {
+            itemView.setBackgroundColor(context.getResources().getColor(R.color.colorPressed));
+        }
     }
 
     private void startWebview(final NewsItem newsItem, final Context context) {
-        //when user click on view, open the article in a webview inside the app
+        //when user click on view, open the article in a web view inside the app
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Change background color when user click article
+                itemView.setBackgroundColor(context.getResources().getColor(R.color.colorPressed));
+
                 //store the articles web url in shared preferences
-                SharedPreferences sharedPref = context.getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("WEBVIEW_URL", newsItem.getUrl());
+                editor.putBoolean(newsItem.getTitle(), true);
                 editor.apply();
 
-                //Start webview activity
+                //Start web view activity
                 Intent startWebview = new Intent(context, ArticleWebviewActivity.class);
                 context.startActivity(startWebview);
             }
         });
-
     }
 
     private void loadPhoto(final NewsItem newsItem, final Context context) {
@@ -71,8 +82,10 @@ class NewsViewHolder extends RecyclerView.ViewHolder {
                     .load(url)
                     .into(thumbnail);
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("exception", "error " + e);
+            Glide.with(context)
+                    .load(context.getString(R.string.ny_times_logo))
+                    .into(thumbnail);
         }
+
     }
 }
