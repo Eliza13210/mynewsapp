@@ -55,7 +55,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
             }
         });
         Log.e("cast", "Here's my code to execute 15 min");
-        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
+       // if (disposable != null && !disposable.isDisposed()) disposable.dispose();
 
     }
 
