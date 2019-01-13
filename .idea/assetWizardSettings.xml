@@ -50,6 +50,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
+                                                <entry key="scalingPercent" value="141" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -60,7 +61,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="fontFamily" value="Roboto Medium" />
+                                                <entry key="fontFamily" value="Roboto Black" />
                                                 <entry key="text" value="My News" />
                                               </map>
                                             </option>

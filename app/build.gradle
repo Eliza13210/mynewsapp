@@ -57,4 +57,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.23.4'
     // Robolectric
     testImplementation 'org.robolectric:robolectric:4.1'
+    //Leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 }
