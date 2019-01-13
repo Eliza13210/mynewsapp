@@ -1,6 +1,7 @@
 package com.oc.liza.mynewsapp.views;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
         this.news = news;
     }
 
+    @NonNull
     @Override
-    public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -33,7 +35,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     // UPDATE VIEW HOLDER WITH A NEWS ITEM
     @Override
-    public void onBindViewHolder(NewsViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull NewsViewHolder viewHolder, int position) {
         viewHolder.updateWithNewsItem(this.news.get(position), context);
     }
 

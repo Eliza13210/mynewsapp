@@ -82,11 +82,11 @@ public class NewsStories implements NewsItem {
         this.url = url;
     }
 
-    public void setMultimedia(ArrayList<NewsImage> multimedia) {
+    void setMultimedia(ArrayList<NewsImage> multimedia) {
         this.multimedia = multimedia;
     }
 
-    public void setMedia(ArrayList<NewsImage> media) {
+    void setMedia(ArrayList<NewsImage> media) {
         this.media = media;
     }
 
@@ -94,7 +94,7 @@ public class NewsStories implements NewsItem {
         this.section = section;
     }
 
-    public void setSubsection(String subsection) {
+    void setSubsection(String subsection) {
         this.subsection = subsection;
     }
 }

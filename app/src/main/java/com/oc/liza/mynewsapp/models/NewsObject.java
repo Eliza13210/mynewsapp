@@ -47,45 +47,48 @@ public class NewsObject {
         }
     }
 
-    public ArrayList<NewsStories> getResults() {
-        return results;
-    }
-
-    public int getNum_results() {
+    private int getNum_results() {
         return num_results;
     }
 
-    public int setNum_results(int num_results) {
-        return this.num_results = num_results;
+    void setNum_results(int num_results) {
+        this.num_results = num_results;
     }
 
-    public NewsObject getResponse() {
+    NewsObject getResponse() {
         return response;
     }
 
-    public ArrayList<NewsSearch> getDocs() {
+    ArrayList<NewsSearch> getDocs() {
         return docs;
     }
 
-    public void setResults(ArrayList<NewsStories> results) {
+    void setResults(ArrayList<NewsStories> results) {
         this.results = results;
     }
 
-    public void setResponse(NewsObject response) {
+    void setResponse(NewsObject response) {
         this.response = response;
     }
 
-    public void setDocs(ArrayList<NewsSearch> docs) {
+    void setDocs(ArrayList<NewsSearch> docs) {
         this.docs = docs;
+    }
+
+    public void setMeta(NewsObject meta) {
+        this.meta = meta;
     }
 
     public NewsObject getMeta() {
         return meta;
     }
 
-    public int getHits() {
-        return hits;
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
 
+    private int getHits() {
+        return hits;
     }
 
     //Get the number of hits depending on the API request

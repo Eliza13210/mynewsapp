@@ -40,7 +40,6 @@ public class MainFragment extends Fragment {
     private NewsAdapter adapter;
     private int position;
     private String url;
-    private SharedPreferences pref;
 
     /**
      * Create new instance is called from the Pager adapter
@@ -61,7 +60,7 @@ public class MainFragment extends Fragment {
      * Check if the bundle contains the position in order to define the URL
      * otherwise set position to 100
      *
-     * @param savedInstanceState
+     * @param savedInstanceState get the bundle to check which position in the fragment page adapter
      */
 
     @Override
@@ -106,7 +105,7 @@ public class MainFragment extends Fragment {
      * and fetch the stream
      */
     private void executeHttpRequestWithRetrofit() {
-        pref = Objects.requireNonNull(getActivity()).getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
+        SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
 
         switch (position) {
             case 0:

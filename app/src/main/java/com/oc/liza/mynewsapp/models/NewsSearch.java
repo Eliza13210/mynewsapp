@@ -106,23 +106,23 @@ public class NewsSearch implements NewsItem {
         return multimedia;
     }
 
-    public void setMultimedia(ArrayList<NewsImage> multimedia) {
+    void setMultimedia(ArrayList<NewsImage> multimedia) {
         this.multimedia = multimedia;
     }
 
-    public String getMain() {
+    private String getMain() {
         return main;
     }
 
-    public void setPublished_date(Date published_date) {
+    void setPublished_date(Date published_date) {
         this.published_date = published_date;
     }
 
-    public void setMain(String main) {
+    void setMain(String main) {
         this.main = main;
     }
 
-    public void setHeadline(NewsSearch headline) {
+    void setHeadline(NewsSearch headline) {
         this.headline = headline;
     }
 
@@ -130,7 +130,7 @@ public class NewsSearch implements NewsItem {
         this.section = section;
     }
 
-    public void setSubsection(String subsection) {
+    void setSubsection(String subsection) {
         this.subsection = subsection;
     }
 }

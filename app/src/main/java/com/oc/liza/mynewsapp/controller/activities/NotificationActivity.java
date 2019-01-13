@@ -144,17 +144,17 @@ public class NotificationActivity extends AppCompatActivity {
      */
     private void enableNotification() {
         context=getApplicationContext();
-        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+       /** AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NotificationBroadcastReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
         assert am != null;
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pi);
-
+*/
         Log.e("NotA", "enable notify");
-        /**
+
         context = getApplicationContext();
         intent = new Intent(context, NotificationService.class);
-        context.startService(intent);*/
+        context.startService(intent);
 
     }
 
