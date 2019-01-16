@@ -1,7 +1,6 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,8 +18,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.NotificationBroadcastReceiver;
-import com.oc.liza.mynewsapp.utils.NotificationService;
+import com.oc.liza.mynewsapp.utils.NotificationJob;
 import com.oc.liza.mynewsapp.utils.UrlManager;
 
 import java.util.Objects;
@@ -35,6 +33,7 @@ public class NotificationActivity extends AppCompatActivity {
     private SharedPreferences pref;
     Context context;
     protected Intent intent;
+    AlarmManager am;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -57,6 +56,8 @@ public class NotificationActivity extends AppCompatActivity {
         pref = getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
         isSwitchChecked();
         initNotification();
+
+        context = getApplicationContext();
     }
 
     /**
@@ -142,19 +143,35 @@ public class NotificationActivity extends AppCompatActivity {
     /**
      * Start a service to run a scheduled notification
      */
+
     private void enableNotification() {
-        context=getApplicationContext();
-       /** AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(context, NotificationBroadcastReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
-        assert am != null;
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, 0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pi);
-*/
-        Log.e("NotA", "enable notify");
 
         context = getApplicationContext();
-        intent = new Intent(context, NotificationService.class);
-        context.startService(intent);
+
+
+        NotificationJob.schedulePeriodic();
+        Log.e("NotA","Notification job schedule");
+        /**
+         *
+         *
+         *         intent = new Intent(context, MyIntentService.class);
+         *         context.startService(intent);
+         *
+         *         if (Build.VERSION.SDK_INT >= 21) {
+         *
+         *          am.setAlarmClock(new AlarmManager.AlarmClockInfo(AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent), pendingIntent);
+         *
+         *             Log.e("broadcast", "alarm clock Alarm manager");
+         *
+
+         Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction par jobscheduler", Toast.LENGTH_SHORT);
+         Util.scheduleJob(context);
+         Log.e("sdk", "21 and up");
+         } else {*/
+
+        Log.e("NotA", "enable Alarm manager");
+        setAlarm(context);
+
 
     }
 
@@ -165,19 +182,55 @@ public class NotificationActivity extends AppCompatActivity {
 
         pref.edit().putBoolean("SWITCH_KEY", false).apply();
 
+        context = getApplicationContext();
+      //  JobManager.instance().cancel(NotificationJob.TAG);
+
+      /**    if (Build.VERSION.SDK_INT >= 21) {
+         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+         assert jobScheduler != null;
+         jobScheduler.cancel(1);
+
+         Log.e("sdk", "cancel 21 and up");
+         } else {
+
+              //Stop the AlarmManager
+              if (am != null)
+                  am = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+              Intent i = new Intent(getApplicationContext(), NotificationBroadcastReceiver.class);
+              PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 54321, i, 0);
+              assert am != null;
+              am.cancel(pi);
+
+              Log.e("NotA", "cancel alarm manager");
+
+          }*/
         Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction desactivée", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 0, 0);
         toast.show();
 
-        //Stop the AlarmManager
-        AlarmManager am = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        Intent i = new Intent(getApplicationContext(), NotificationBroadcastReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), 0, i, PendingIntent.FLAG_NO_CREATE);
-        assert am != null;
-        am.cancel(pi);
+    }
 
-        //Stop the service
-//        context.stopService(i);
-        Log.e("NotA", "cancel alarm manager");
+    //Stop the service
+    //      context.stopService(i);
+    public void setAlarm(Context context) {
+
+
+        /**Works fine on Marshmallow
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent i = new Intent(context, NotificationBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 54321, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        long firstMillis = System.currentTimeMillis(); // alarm is set right away
+        assert am != null;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Toast toast = Toast.makeText(NotificationActivity.this, "Notifaction par jobscheduler", Toast.LENGTH_SHORT);
+            Util.scheduleJob(context);
+            Log.e("notA", "job scheduler 21 and up");
+            } else {
+            am.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+
+            Log.e("broadcast", "Lollipop Alarm manager");
+        }
+*/
     }
 }
