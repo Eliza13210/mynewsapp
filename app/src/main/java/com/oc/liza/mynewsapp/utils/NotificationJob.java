@@ -1,8 +1,6 @@
 package com.oc.liza.mynewsapp.utils;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
@@ -12,7 +10,6 @@ import android.util.Log;
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.controller.activities.MainActivity;
 import com.oc.liza.mynewsapp.models.NewsObject;
 
 import java.util.concurrent.TimeUnit;
@@ -21,17 +18,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 public class NotificationJob extends Job {
-    static final String TAG = "show_notification_job_tag";
+
+    private Disposable disposable;
+    public static final String TAG = "show_notification_job_tag";
     private String CHANNEL_ID;
     private int hits;
 
     @NonNull
     @Override
     protected Result onRunJob(@NonNull Params params) {
-        PendingIntent pi = PendingIntent.getActivity(getContext(), 0,
-                new Intent(getContext(), MainActivity.class), 0);
-
-        Log.e("Job", "on run job ");
         checkHits();
         return Result.SUCCESS;
     }
@@ -44,21 +39,20 @@ public class NotificationJob extends Job {
         CHANNEL_ID = sharedPref.getString("CHANNEL_KEY", null);
 
         //Do the API request
-        Disposable disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
+        disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
 
             @Override
             public void onNext(NewsObject news) {
                 //Check how many hits
                 hits = news.checkIfResult();
-                //Create notification
                 createNotification(hits);
             }
 
             @Override
             public void onError(Throwable e) {
                 //Create notification with error message
-                createNotification(-1);
-
+                hits = -1;
+                createNotification(hits);
                 Log.e("Error api request", "Error " + e);
             }
 
@@ -66,13 +60,10 @@ public class NotificationJob extends Job {
             public void onComplete() {
             }
         });
-
-        Log.e("cast", "Here's my code to execute 15 min");
-        if (disposable != null && !disposable.isDisposed()) disposable.dispose();
-
     }
 
     private void createNotification(int result) {
+
         //Show correct message in the notification depending on the result
         String message;
         if (result == -1) {
