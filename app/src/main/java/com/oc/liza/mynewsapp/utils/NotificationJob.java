@@ -22,7 +22,8 @@ public class NotificationJob extends Job {
     private Disposable disposable;
     public static final String TAG = "show_notification_job_tag";
     private String CHANNEL_ID;
-    private int hits;
+    int hits;
+    protected String message;
 
     @NonNull
     @Override
@@ -62,13 +63,12 @@ public class NotificationJob extends Job {
         });
     }
 
-    private void createNotification(int result) {
+    void createNotification(int hits) {
 
         //Show correct message in the notification depending on the result
-        String message;
-        if (result == -1) {
+        if (hits == -1) {
             message = "Error";
-        } else if (result < 2) {
+        } else if (hits < 2) {
             message = "Il y a " + hits + " article";
         } else {
             message = "Il y a " + hits + " articles";
@@ -91,7 +91,5 @@ public class NotificationJob extends Job {
                 .setUpdateCurrent(true)
                 .build()
                 .schedule();
-
-        Log.e("NotJ", "schedule per");
     }
 }

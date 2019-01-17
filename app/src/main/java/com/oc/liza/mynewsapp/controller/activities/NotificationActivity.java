@@ -141,7 +141,7 @@ public class NotificationActivity extends AppCompatActivity {
      * Use job creator to run a scheduled notification
      */
 
-    void enableNotification() {
+    private void enableNotification() {
         NotificationJob.schedulePeriodic();
     }
 
