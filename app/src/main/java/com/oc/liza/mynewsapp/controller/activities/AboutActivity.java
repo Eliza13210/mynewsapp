@@ -46,7 +46,7 @@ public class AboutActivity extends AppCompatActivity {
         });
 
         //Set text to text views
-        Spanned title = (Html.fromHtml("My NewsStories App <br/>"
+        Spanned title = (Html.fromHtml("My News App <br/>"
                 + "<small><i> un projet Openclassrooms </i></small><br/>"));
         Spanned about = (Html.fromHtml(
                 "par Elisabet Boulanger <br/>"

@@ -22,7 +22,7 @@ public class NotificationJob extends Job {
     private Disposable disposable;
     public static final String TAG = "show_notification_job_tag";
     private String CHANNEL_ID;
-    int hits;
+    private int hits;
     protected String message;
 
     @NonNull
@@ -63,7 +63,7 @@ public class NotificationJob extends Job {
         });
     }
 
-    void createNotification(int hits) {
+    private void createNotification(int hits) {
 
         //Show correct message in the notification depending on the result
         if (hits == -1) {

@@ -1,7 +1,6 @@
-package com.oc.liza.mynewsapp.controller.fragments;
+package com.oc.liza.mynewsapp.utils;
 
 import com.oc.liza.mynewsapp.models.NewsObject;
-import com.oc.liza.mynewsapp.utils.NewsStream;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,7 +23,8 @@ import io.reactivex.schedulers.Schedulers;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class MainFragmentTest {
+
+public class NewsStreamTest {
 
     @Before
     public void setUp() {
@@ -55,8 +55,8 @@ public class MainFragmentTest {
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
 
         // 4 - Get list of user fetched
-        NewsObject news=testObserver.values().get(0);
-        List<NewsObject> newsFetched=new ArrayList<>();
+        NewsObject news = testObserver.values().get(0);
+        List<NewsObject> newsFetched = new ArrayList<>();
         newsFetched.addAll(news.getList());
 
         assertNotNull(newsFetched);
@@ -76,13 +76,14 @@ public class MainFragmentTest {
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
 
         // 4 - Get list of user fetched
-        NewsObject news=testObserver.values().get(0);
-        List<NewsObject> newsFetched=new ArrayList<>();
+        NewsObject news = testObserver.values().get(0);
+        List<NewsObject> newsFetched = new ArrayList<>();
         newsFetched.addAll(news.getList());
 
         assertNotNull(newsFetched);
         assertTrue(news.checkIfResult() != 0);
     }
+
     @Test
     public void fetchSearchNewsTest() {
         //1 - Get the stream
@@ -96,13 +97,11 @@ public class MainFragmentTest {
                 .awaitTerminalEvent(); // 3.3 - Await the stream terminated before continue
 
         // 4 - Get list of user fetched
-        NewsObject news=testObserver.values().get(0);
-        List<NewsObject> newsFetched=new ArrayList<>();
+        NewsObject news = testObserver.values().get(0);
+        List<NewsObject> newsFetched = new ArrayList<>();
         newsFetched.addAll(news.getList());
 
         assertNotNull(newsFetched);
         assertTrue(news.checkIfResult() != 0);
     }
-
 }
-

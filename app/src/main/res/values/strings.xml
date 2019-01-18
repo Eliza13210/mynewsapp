@@ -17,7 +17,7 @@
 
     <string name="end_date">End date</string>
     <string name="begin_date">Begin date</string>
-    <string name="date_ex">2012/12/31</string>
+    <string name="date_ex">YYYY/MM/DD</string>
     <string name="search_query_term">Search query term</string>
 
     <string name="top_stories_url">https://api.nytimes.com/svc/topstories/v2/home.json?&amp;api-key=799e9f0e6e264b3a8e21b57f3f05dfd0</string>
