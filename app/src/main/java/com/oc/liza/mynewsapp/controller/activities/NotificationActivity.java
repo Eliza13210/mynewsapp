@@ -1,13 +1,9 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -17,22 +13,19 @@ import android.widget.Toast;
 
 import com.evernote.android.job.JobManager;
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.NotificationJob;
-import com.oc.liza.mynewsapp.utils.UrlManager;
+import com.oc.liza.mynewsapp.notification.NotificationJob;
+import com.oc.liza.mynewsapp.network.UrlManager;
 
 import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends BaseActivity {
 
     protected UrlManager manager;
     private SharedPreferences pref;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.query)
     EditText query;
     @BindView(R.id.switch_notify)
@@ -47,12 +40,14 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
-        ButterKnife.bind(this);
-
         isSwitchChecked();
         initNotification();
 
+    }
+
+    @Override
+    public int getFragmentLayout() {
+        return R.layout.activity_notification;
     }
 
     /**
@@ -82,16 +77,6 @@ public class NotificationActivity extends AppCompatActivity {
      */
     private void initNotification() {
         manager = new UrlManager(this);
-
-        //the toolbar to navigate back to main
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
 
         //Open the keyboard automatically
         query.setSelection(0);

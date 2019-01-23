@@ -3,7 +3,7 @@ package com.oc.liza.mynewsapp;
 import android.app.Application;
 
 import com.evernote.android.job.JobManager;
-import com.oc.liza.mynewsapp.utils.NotificationJobCreator;
+import com.oc.liza.mynewsapp.notification.NotificationJobCreator;
 
 public class MainApp extends Application {
     @Override

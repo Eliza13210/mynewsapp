@@ -27,7 +27,7 @@ public class NewsSearch implements NewsItem {
     @Expose
     private Date published_date;
 
-    //Section name can be either of these three
+    //Section name can be either of these
 
     @SerializedName("section_name")
     @Expose

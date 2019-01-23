@@ -1,7 +1,7 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.UrlManager;
+import com.oc.liza.mynewsapp.network.UrlManager;
 
 import org.junit.Before;
 import org.junit.Test;

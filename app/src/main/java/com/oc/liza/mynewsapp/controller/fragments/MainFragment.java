@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsItem;
 import com.oc.liza.mynewsapp.models.NewsObject;
-import com.oc.liza.mynewsapp.utils.NewsStream;
+import com.oc.liza.mynewsapp.network.NewsStream;
 import com.oc.liza.mynewsapp.views.NewsAdapter;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 package com.oc.liza.mynewsapp.utils;
 
 import com.oc.liza.mynewsapp.models.NewsObject;
+import com.oc.liza.mynewsapp.network.NewsStream;
 
 import org.junit.AfterClass;
 import org.junit.Before;

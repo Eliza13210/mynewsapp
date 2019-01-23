@@ -28,6 +28,8 @@ public class NewsStories implements NewsItem {
     @Expose
     private String url;
 
+    //Image url can be either of these two
+
     @SerializedName("multimedia")
     @Expose
     private ArrayList<NewsImage> multimedia;

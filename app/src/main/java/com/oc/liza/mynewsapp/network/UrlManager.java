@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.network;
 
 import android.content.Context;
 import android.content.SharedPreferences;

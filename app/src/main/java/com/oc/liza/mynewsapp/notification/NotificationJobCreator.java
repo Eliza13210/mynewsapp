@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.notification;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

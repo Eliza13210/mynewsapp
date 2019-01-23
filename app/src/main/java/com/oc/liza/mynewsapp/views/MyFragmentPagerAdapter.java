@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.views;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,9 +1,7 @@
 package com.oc.liza.mynewsapp.controller.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -12,19 +10,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.UrlManager;
+import com.oc.liza.mynewsapp.network.UrlManager;
 
 import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
 
     protected UrlManager manager;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.search_button)
     Button searchButton;
     @BindView(R.id.query)
@@ -44,9 +39,12 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
         initLayout();
+    }
+
+    @Override
+    public int getFragmentLayout() {
+        return R.layout.activity_search;
     }
 
     private void initLayout() {
@@ -55,16 +53,6 @@ public class SearchActivity extends AppCompatActivity {
         //Open the keyboard automatically
         search_query.setSelection(0);
         Objects.requireNonNull(this.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        //Toolbar to navigate back to Main activity
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

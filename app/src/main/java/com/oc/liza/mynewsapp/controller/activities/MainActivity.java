@@ -20,7 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
-import com.oc.liza.mynewsapp.utils.MyFragmentPagerAdapter;
+import com.oc.liza.mynewsapp.views.MyFragmentPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

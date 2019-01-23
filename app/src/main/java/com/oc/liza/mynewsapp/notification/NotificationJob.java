@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.notification;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,7 @@ import com.evernote.android.job.Job;
 import com.evernote.android.job.JobRequest;
 import com.oc.liza.mynewsapp.R;
 import com.oc.liza.mynewsapp.models.NewsObject;
+import com.oc.liza.mynewsapp.network.NewsStream;
 
 import java.util.concurrent.TimeUnit;
 

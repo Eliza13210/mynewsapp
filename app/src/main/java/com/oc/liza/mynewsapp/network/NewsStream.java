@@ -1,4 +1,4 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.network;
 
 import com.oc.liza.mynewsapp.models.NewsObject;
 
