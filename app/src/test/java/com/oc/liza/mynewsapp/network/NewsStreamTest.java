@@ -1,14 +1,12 @@
-package com.oc.liza.mynewsapp.utils;
+package com.oc.liza.mynewsapp.network;
 
 import com.oc.liza.mynewsapp.models.NewsObject;
-import com.oc.liza.mynewsapp.network.NewsStream;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,6 @@ public class NewsStreamTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         RxAndroidPlugins.setInitMainThreadSchedulerHandler(new Function<Callable<Scheduler>, Scheduler>() {
             @Override
             public Scheduler apply(Callable<Scheduler> schedulerCallable) {

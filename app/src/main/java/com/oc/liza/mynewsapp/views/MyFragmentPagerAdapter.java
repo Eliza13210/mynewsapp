@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.oc.liza.mynewsapp.controller.fragments.MainFragment;
+import java.util.List;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -12,19 +12,25 @@ import com.oc.liza.mynewsapp.controller.fragments.MainFragment;
  */
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-    public MyFragmentPagerAdapter(FragmentManager fm) {
+    final static int FRAGMENT_COUNT=5;
+private List<Fragment> fragmentList;
+
+    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
+        this.fragmentList=fragmentList;
     }
 
     @Override
     public Fragment getItem(int i) {
         // getItem is called to instantiate the fragment for the given page.
-        return MainFragment.newInstance(i);
+        return this.fragmentList.get(i);
     }
 
     @Override
     public int getCount() {
-        return 5;
+
+        //variable static
+        return FRAGMENT_COUNT;
     }
 
 }

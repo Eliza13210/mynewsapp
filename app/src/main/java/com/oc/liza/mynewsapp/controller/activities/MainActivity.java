@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,7 +21,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.oc.liza.mynewsapp.R;
+import com.oc.liza.mynewsapp.controller.fragments.HealthFragment;
+import com.oc.liza.mynewsapp.controller.fragments.MoviesFragment;
+import com.oc.liza.mynewsapp.controller.fragments.PopularFragment;
+import com.oc.liza.mynewsapp.controller.fragments.ScienceFragment;
+import com.oc.liza.mynewsapp.controller.fragments.TopStoriesFragment;
 import com.oc.liza.mynewsapp.views.MyFragmentPagerAdapter;
+
+import java.util.List;
+import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,9 +64,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initMain() {
         //Initiate toolbar
         setSupportActionBar(mToolbar);
+        // Creation of the list of fragments
+        List<Fragment> fragments = new Vector<>();
 
-        // Set up the ViewPager with the sections adapter to navigate between the tabs
-        MyFragmentPagerAdapter fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        // Add Fragments in a list
+        fragments.add(Fragment.instantiate(this, TopStoriesFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, PopularFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, ScienceFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, HealthFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, MoviesFragment.class.getName()));
+
+        // Set up the ViewPager with the adapter to navigate between the fragments
+        MyFragmentPagerAdapter fragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(fragmentPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -95,15 +113,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button
+        // Handle action bar item clicks.
         startActivity(item);
         return true;
     }
@@ -119,13 +136,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.search:
                 //User chose the "Search" item
-                Intent search = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(search);
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
             case R.id.action_notifications:
                 // User chose the "Notification" item
-                Intent notification = new Intent(MainActivity.this, NotificationActivity.class);
-                startActivity(notification);
+                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
                 break;
             case R.id.action_help:
                 // User chose the "Help" action
