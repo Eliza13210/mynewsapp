@@ -15,7 +15,7 @@ public class UrlManager {
     private String query;
     private String beginDate = "";
     private String endDate = "";
-    private String checkboxQuery;
+    private String checkboxQuery = "";
 
     public UrlManager(Context context) {
         this.context = context;
@@ -47,8 +47,7 @@ public class UrlManager {
         checkBoxList.add(cbScience);
         for (CheckBox box : checkBoxList) {
             if (box.isChecked()) {
-                checkboxQuery = "";
-                checkboxQuery += box.getText() + "%20";
+                checkboxQuery += "\"" + box.getText() + "\"" + "%20";
             }
         }
     }
@@ -88,7 +87,7 @@ public class UrlManager {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(sharedPrefKey, url);
         editor.apply();
-        checkboxQuery = null;
+        checkboxQuery = "";
         Log.e("search", url);
     }
 

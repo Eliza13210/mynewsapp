@@ -31,7 +31,7 @@ public class HelpActivity extends BaseActivity {
 
     private void initHelp() {
         //Set text to text views
-        Spanned search = (Html.fromHtml("<b>Fonctions de l'application </b><br><br><small><i>Search</i> " +
+        Spanned search = (Html.fromHtml("<b>Fonctionnalités de l'application </b><br><br><small><i>Search</i> " +
                 "<br>Faites une recherche parmi tous les articles de NY times</small>"));
 
         Spanned notify = (Html.fromHtml("<i>Notification</i><br> Activez les notifications, l'application ira vérifier" +

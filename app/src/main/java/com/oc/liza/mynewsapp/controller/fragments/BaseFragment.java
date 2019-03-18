@@ -1,7 +1,5 @@
 package com.oc.liza.mynewsapp.controller.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +20,6 @@ import com.oc.liza.mynewsapp.views.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,24 +34,24 @@ public abstract class BaseFragment extends Fragment {
     // 2 - Declare list of news (NewsStories) & Adapter
     protected List<NewsItem> newsList;
     protected NewsAdapter adapter;
-    protected int position;
     protected String url;
 
-
-    /**
-     *
-     * @param savedInstanceState get the bundle to check which position in the fragment page adapter
-     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
     @Override
-    public abstract View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        ButterKnife.bind(this, view);
+        setUrl();
+        this.configureRecyclerView();
+        this.executeHttpRequestWithRetrofit();
+        return view;
+    }
 
     public abstract void setUrl();
 
@@ -72,12 +69,10 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * Define the url depending on the position
-     * and fetch the stream
+     * Define the url to start the stream and
+     * and fetch the news
      */
     protected void executeHttpRequestWithRetrofit() {
-        SharedPreferences pref = Objects.requireNonNull(getActivity()).getSharedPreferences("MYNEWS_KEY", Context.MODE_PRIVATE);
-
 
         //- Execute the stream subscribing to Observable defined inside NewsStream
         this.disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
@@ -109,7 +104,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected void updateUIWithListOfNews(NewsObject news) {
         if (news.checkIfResult() == 0) {
-            Snackbar.make(recyclerView, "Pas de résultat", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(recyclerView, "No articles found", Snackbar.LENGTH_LONG).show();
 
         } else {
             newsList.addAll(news.getList());

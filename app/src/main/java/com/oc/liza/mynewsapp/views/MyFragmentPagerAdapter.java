@@ -12,12 +12,13 @@ import java.util.List;
  */
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-    final static int FRAGMENT_COUNT=5;
-private List<Fragment> fragmentList;
+
+    private final static int FRAGMENT_COUNT = 5;
+    private List<Fragment> fragmentList;
 
     public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
-        this.fragmentList=fragmentList;
+        this.fragmentList = fragmentList;
     }
 
     @Override
