@@ -20,11 +20,11 @@ import io.reactivex.observers.DisposableObserver;
 
 public class NotificationJob extends Job {
 
-    private Disposable disposable;
     public static final String TAG = "show_notification_job_tag";
     private String CHANNEL_ID;
     private int hits;
-    protected String message;
+    private String message;
+    private Disposable disposable;
 
     @NonNull
     @Override
@@ -41,7 +41,7 @@ public class NotificationJob extends Job {
         CHANNEL_ID = sharedPref.getString("CHANNEL_KEY", null);
 
         //Do the API request
-        disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
+        this.disposable = NewsStream.streamFetchNewslist(url).subscribeWith(new DisposableObserver<NewsObject>() {
 
             @Override
             public void onNext(NewsObject news) {
@@ -88,7 +88,7 @@ public class NotificationJob extends Job {
 
     public static void schedulePeriodic() {
         new JobRequest.Builder(NotificationJob.TAG)
-                .setPeriodic(TimeUnit.DAYS.toMillis(1), TimeUnit.MINUTES.toMillis(5))
+                .setPeriodic(TimeUnit.DAYS.toMillis(1), TimeUnit.MINUTES.toMillis(10))
                 .setUpdateCurrent(true)
                 .build()
                 .schedule();
