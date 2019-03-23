@@ -88,7 +88,7 @@ public class NotificationJob extends Job {
 
     public static void schedulePeriodic() {
         new JobRequest.Builder(NotificationJob.TAG)
-                .setPeriodic(TimeUnit.DAYS.toMillis(1), TimeUnit.MINUTES.toMillis(10))
+                .setPeriodic(TimeUnit.DAYS.toMillis(1), TimeUnit.MINUTES.toMillis(5))
                 .setUpdateCurrent(true)
                 .build()
                 .schedule();
