@@ -57,7 +57,7 @@ public class UrlManagerTest {
         manager.createSearchUrl();
         String url = manager.getUrl();
         assertEquals("http://api.nytimes.com/svc/search/v2/articlesearch.json?&" +
-                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&fq=news_desk:(Science%20)&q=christmas&begin_date=20010101" +
+                "api-key=799e9f0e6e264b3a8e21b57f3f05dfd0&fq=news_desk:(\"Science\"%20)&q=christmas&begin_date=20010101" +
                 "&end_date=20121212&sort=newest", url);
     }
 
