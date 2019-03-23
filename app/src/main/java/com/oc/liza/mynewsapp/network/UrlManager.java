@@ -97,6 +97,14 @@ public class UrlManager {
      * @return true if conditions are met
      */
     public boolean checkConditions() {
-        return (checkboxQuery != null && !query.isEmpty());
+        return (!checkboxQuery.isEmpty() && !query.isEmpty());
+    }
+
+    public void clearInput() {
+        checkboxQuery = "";
+        url = "";
+        query = "";
+        beginDate = "";
+        endDate = "";
     }
 }

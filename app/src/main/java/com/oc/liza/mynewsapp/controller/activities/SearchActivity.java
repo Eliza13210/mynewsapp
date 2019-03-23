@@ -68,6 +68,7 @@ public class SearchActivity extends BaseActivity {
                     manager.saveUrl("SEARCH_KEY");
                     startActivity(new Intent(SearchActivity.this, SearchResultActivity.class));
                 } else {
+                    manager.clearInput();
                     Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
                 }
             }

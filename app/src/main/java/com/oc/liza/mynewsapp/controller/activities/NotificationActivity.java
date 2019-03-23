@@ -95,6 +95,7 @@ public class NotificationActivity extends BaseActivity {
                         saveNotificationUrlAndState();
                         enableNotification();
                     } else {
+                        manager.clearInput();
                         Toast.makeText(getApplicationContext(), "Sélectionnez au moins une catégorie et un mot clé", Toast.LENGTH_SHORT).show();
                         switchNotify.toggle();
                     }
@@ -134,7 +135,7 @@ public class NotificationActivity extends BaseActivity {
      * Cancel the scheduled job for notifications
      */
     private void cancelNotification() {
-
+        manager.clearInput();
         pref.edit().putBoolean("SWITCH_KEY", false).apply();
 
         JobManager.instance().cancelAllForTag((NotificationJob.TAG));
